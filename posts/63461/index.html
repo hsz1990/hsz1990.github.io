@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        uni-app组件学习笔记 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.gif" />
+        </div>
+        <div class="name">
+            <i>hsz199086@163.com</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#uni-app中的各种组件"><span class="toc-text">uni-app中的各种组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-uni-app组件"><span class="toc-text">1. uni-app组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-vue组件"><span class="toc-text">2. vue组件</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        uni-app组件学习笔记
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-02-28 18:16:04</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="uni-app中的各种组件"><a href="#uni-app中的各种组件" class="headerlink" title="uni-app中的各种组件"></a>uni-app中的各种组件</h2><p>通过之前uni-app基础学习了解到uni-app是一个海纳百川的框架，它支持各种各样的组件及编码方式。虽然官网推荐使用插件市场的uni-app原生插件代替微信小程序等其他规范的组件，但更多的时候我们都有自己工作中积累的自定义组件，所以如何平滑的迁移到目标平台也是我们关注的一个重点。<br>开始前的准备:  </p>
+<ul>
+<li>通过CLI创建项目<br><code>vue create -p dcloudio/uni-preset-vue my-test</code></li>
+<li>选择默认模板新建一个空项目<br><img src="/images/h5-cli-01.png" alt="选择模板"></li>
+<li>以H5方式运行项目  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd my-test</span><br><span class="line">npm run serve</span><br></pre></td></tr></table></figure>
+(由于写文时条件限制我的电脑是linux系统，没有安装微信/支付宝等开发者工具，以下运行效果图皆只有H5平台，后续补充)<h4 id="1-uni-app组件"><a href="#1-uni-app组件" class="headerlink" title="1. uni-app组件"></a>1. uni-app组件</h4>uni-app组件大致分为内置组件、官方扩展组件、第三方uni-app插件，几乎所有组件都有各自自定义的属性，可以对该组件的功能或样式进行修饰  </li>
+<li>uni-app内置组件是最常用的，与微信内置组件相同。基础组件分为以下八大类（以下列出部分组件的注意点）：  </li>
+</ul>
+<table>
+    <tr>
+        <th>类别</th>
+        <th>组件</th>
+        <th>描述及注意事项</th>
+    </tr >
+    <tr >
+        <td rowspan="3">视图容器</td>
+        <td>view</td>
+        <td>视图容器，类似于HTML中的div</td>
+    </tr>
+    <tr>
+        <td>scroll-view</td>
+        <td>
+            1.scroll-view 不适合放长列表，有性能问题。长列表滚动和下拉刷新，应该使用原生导航栏搭配页面级的滚动和下拉刷新实现。<br/>
+            2.scroll-view是区域滚动，不会触发页面滚动，无法触发pages.json配置的下拉刷新、页面触底onReachBottomDistance、titleNView的transparent透明渐变。
+        </td>
+    </tr>
+    <tr>
+        <td>swiper</td>
+        <td>
+                1.swiper是单页组件，适合做banner图轮播和简单列表左右滑动。<br/>
+                2.因为性能问题，swiper不适合做复杂的长列表。
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="4">基础内容组件</td>
+        <td>icon</td>
+        <td>图标</td>
+    </tr>
+    <tr>
+        <td>text</td>
+        <td>
+            1.组件内只支持嵌套text组件，不支持其它组件或自定义组件，否则会引发在不同平台的渲染差异。
+            2.支持 \n 方式换行。
+        </td>
+    </tr>
+    <tr>
+        <td>rich-text</td>
+        <td>富文本,支付宝小程序 nodes 属性只支持使用 Array 类型</td>
+    </tr>
+    <tr>
+        <td>progress</td>
+        <td>进度条</td>
+    </tr>
+    <tr>
+        <td rowspan="2">表单组件</td>
+        <td>picker</td>
+        <td>弹出式列表选择器</td>
+    </tr>
+    <tr>
+        <td>picker-view</td>
+        <td>窗体内嵌式列表选择器</td>
+    </tr>
+    <tr>
+        <td >导航</td>
+        <td >navigator</td>
+        <td>页面链接。类似于HTML中的a标签</td>
+    </tr>
+    <tr>
+        <td rowspan="3" >媒体组件</td>
+        <td >audio</td>
+        <td>不再维护，使用uni.createInnerAudioContext 替代</td>
+    </tr>
+    <tr>
+        <td >live-player</td>
+        <td>直播播放</td>
+    </tr>
+    <tr>
+        <td >live-pusher</td>
+        <td>实时音视频录制，也称直播推流</td>
+    </tr>
+    <tr>
+        <td >媒体组件</td>
+        <td >audio</td>
+        <td>不再维护，使用uni.createInnerAudioContext 替代</td>
+    </tr>
+    <tr>
+        <td >地图</td>
+        <td >map</td>
+        <td>
+            组件的宽/高推荐写直接量，比如：750rpx，不要设置百分比值。<br/>
+            uni-app 只支持 gcj02 坐标
+        </td>
+    </tr>
+    <tr>
+        <td >画布</td>
+        <td >canvas</td>
+        <td>
+            1.默认宽度300px、高度 225px，大小后需要重新绘制<br/>
+            2.同一页面中的 canvas-id 不可重复,否则画布将被隐藏<br/>
+            3.微信、百度、QQ小程序中层级高于前端组件,不可内嵌在 scroll-view、swiper、picker-view、movable-view 中使用
+        </td>
+    </tr>
+     <tr>
+        <td >webview</td>
+        <td >web-view</td>
+        <td>
+            1.小程序仅支持加载网络网页，不支持本地html<br/>
+            2.小程序端 web-view 组件一定有原生导航栏，下面一定是全屏的 web-view 组件，navigationStyle: custom 对 web-view 组件无效。
+        </td>
+    </tr>
+</table>
+每个组件都有其特定的属性，详细
++ uni-app扩展组件(即uni-ui)是DCloud提供的一个跨端ui库，它是基于vue组件的、flex布局的、无dom的跨全端ui框架,它是基础组件的补充。  
+   如果创建项目时没有选择`hello uni-app`模板，则可使用npm引入uni-ui  
+   `npm install @dcloudio/uni-ui`  
+   uni-ui目前小程序和混合app领域，暂时还没有比uni ui更高性能的框架。在满足业务条件的情况下不要使用自定义组件。 
+   注:uni-ui 不支持使用 Vue.use() 的方式安装
++ uni-app第三方插件市场及本地自定义组件是对以上两种组件的补充
+
+<h4 id="2-vue组件"><a href="#2-vue组件" class="headerlink" title="2. vue组件"></a>2. vue组件</h4><p>uni-app只支持vue单文件组件,所以在使用第三方组件如：npm引入某组件的时候应注意。有些原生vue支持的组件在uni-app中是错误的组件,例如：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; uni-app不支持的组件</span><br><span class="line">&#x2F;&#x2F;  1.动态组件</span><br><span class="line">&lt;component v-bind:is&#x3D;&quot;currentTabComponent&quot;&gt;&lt;&#x2F;component&gt;</span><br><span class="line">&#x2F;&#x2F;  2.异步组件</span><br><span class="line">Vue.component(&#39;async-example&#39;, function (resolve, reject) &#123;</span><br><span class="line">  setTimeout(function () &#123;</span><br><span class="line">    resolve(&#123;</span><br><span class="line">      template: &#39;&lt;div&gt;I am async!&lt;&#x2F;div&gt;&#39;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; 3.包含自定义render的组件</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    ...</span><br><span class="line">    export default &#123;</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123; &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">        render (createElement) &#123;</span><br><span class="line">            return createElement(...)</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">组件的引用兼容了vue及小程序  </span><br><span class="line">使用方式1：在src目录下创建&#x2F;component目录存放组件，以插件市场中的uni-goods-nav为例:  </span><br><span class="line">   1. 插件市场中下载组件包(https:&#x2F;&#x2F;ext.dcloud.net.cn&#x2F;plugin?id&#x3D;865)</span><br><span class="line">   2. 解压后将goods-nav目录放置在component目录下</span><br><span class="line">   3. 引入插件、注册、使用，与常规vue开发一模一样</span><br></pre></td></tr></table></figure>
+   <template>
+    <view>
+        <view class="goods-carts">
+            <uni-goods-nav :options="options" :button-group="buttonGroup" />
+        </view>
+    </view>
+</template>
+<script>
+    import uniGoodsNav from '@/components/uni-goods-nav/uni-goods-nav.vue'
+    export default {
+        components: { uniGoodsNav },
+        data() {
+            return {
+                options: [{
+                    icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/kefu.png',
+                    text: '客服'
+                }, {
+                    icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/dianpu.png',
+                    text: '店铺'
+                }, {
+                    icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/carts.png',
+                    text: '购物车',
+                    info: 2
+                }],
+                buttonGroup: [{
+                        text: '加入购物车',
+                        backgroundColor: '#ffa200 ',
+                        color: '#fff'
+                    },
+                    {
+                        text: '立即购买',
+                        backgroundColor: '#ff0000',
+                        color: '#fff'
+                    }
+                ]
+            }
+        }
+    }
+</script>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用方式2： 与方式1一样，但使用组件时与小程序一样在pages.json中引入组件</span><br></pre></td></tr></table></figure>
+{
+    "path": "subPages/demo/uni-goods-nav",
+    "style": {
+            "navigationBarTitleText": "购物车",
+            "usingComponents": {
+            "uni-goods-nav": "/components/uni-goods-nav/uni-goods-nav"
+    }
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">得到的效果:  </span><br><span class="line">![购物车](&#x2F;images&#x2F;gwc.png)</span><br><span class="line">熟悉web开发的前端开发者都习惯从npm仓库中获取组件，所以很多时候觉得通过下载组件包然后解压的方式显得很怪异，实际上uni-app是支持npm方式引入组件的，只是这有很大风险会有部分平台不支持的问题。可以通过条件编译来屏蔽不支持的平台。以mpvue-echarts为例</span><br></pre></td></tr></table></figure>
+// npm安装包
+npm install echarts mpvue-echarts --save
+// echarts-weixin.vue
+<template>  
+    <div class="container">  
+        <mpvue-echarts :echarts="echarts" :onInit="onInit" />  
+    </div>  
+</template>  
+<script>  
+    import * as echarts from 'echarts'  
+    import mpvueEcharts from 'mpvue-echarts'  
+    export default { 
+        components: {  mpvueEcharts  },  
+        data() {  
+            return {  
+                echarts,  
+                onInit: function (canvas, width, height) {
+                ...
+                }
+            }  
+        }
+    }  
+</script>
+// echarts-h5.vue
+<script>
+import * as echarts from 'echarts'
+var myChart = echarts.init(document.getElementById('echarts'));
+myChart.setOption({
+    ...
+})
+</script>
+// pages.json
+#ifdef MP-WEIXIN
+{
+    "path": "pages/demo/echarts-weixin",
+    "style": {
+        "navigationBarTitleText": "demo-echarts"
+    }
+},
+#endif
+#ifdef H5
+{
+    "path": "pages/demo/echarts-h5",
+    "style": {
+        "navigationBarTitleText": "demo-echarts"
+    }
+},
+#endif
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 3. 微信小程序组件</span><br><span class="line">由于性能问题，开发中应尽量避免直接使用小程序的组件。但是uni-app仍然 支持在App 和 小程序 中使用小程序自定义组件。  </span><br><span class="line">   1. 在项目src目录下新建小程序组件放置目录，微信及QQ-wxcomponents&#x2F;支付宝-mycomponents&#x2F;百度-swancomponents&#x2F;头条-ttcomponents</span><br><span class="line">   2. 在 pages.json 对应页面的 style -&gt; usingComponents 引入组件</span><br><span class="line">   3. 页面中使用组件</span><br><span class="line"></span><br><span class="line">以有赞的vant-weapp button组件为例</span><br><span class="line">1. 下载组件并放置到wxcomponents目录下:  </span><br><span class="line">    &#96;npm i @vant&#x2F;weapp -S --production&#96; </span><br><span class="line">    复制node_modules&#x2F;@vant&#x2F;weapp&#x2F;dist&#x2F;button到wxcomponents&#x2F;vant&#x2F;下</span><br><span class="line">2. pages.json 中使用组件</span><br></pre></td></tr></table></figure>
+{
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant/button/index"
+  },
+  "navigationBarTitleText": "test-vant"
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3. demo-test-wx.vue</span><br></pre></td></tr></table></figure>
+<template>
+    <view>
+        <view class="uni-common-mt" style="text-align: center;">
+            <van-button type="primary" @click="onClick">vant按钮组件</van-button>
+        </view>
+    </view>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                checked: true
+            };
+        },
+        methods: {
+            onClick() {
+                uni.showToast({
+                    title: "uni-app支持在微信小程序、QQ小程序端、App端、H5端引入微信小程序自定义组件。",
+                    mask: false,
+                    icon: "none",
+                    duration: 3000
+                });
+            }
+        }
+    }
+</script>
+<style>
+</style>
+```
+效果：
+![结果](/images/test-vant.png)
+
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

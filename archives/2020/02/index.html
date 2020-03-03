@@ -49,10 +49,10 @@
 <div class="nav" id="nav">
     <div class="avatar-name">
         <div class="avatar ">
-            <img src="/" />
+            <img src="/images/avatar.gif" />
         </div>
         <div class="name">
-            <i>John Doe</i>
+            <i>hsz199086@163.com</i>
         </div>
     </div>
     <div class="contents" id="nav-content">
@@ -60,25 +60,25 @@
             <li >
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
-                    <span>HOME</span>
+                    <span>主页</span>
                 </a>
             </li>
             <li >
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
-                    <span>TAGS</span>
+                    <span>标签</span>
                 </a>
             </li>
             <li  class=active >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
-                    <span>ARCHIVES</span>
+                    <span>存档</span>
                 </a>
             </li>
             <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
-                    <span>ABOUT</span>
+                    <span>关于</span>
                 </a>
             </li>
             
@@ -93,7 +93,7 @@
         <div class="search-input">
             <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
             <input id="search-input"/>
-            <span id="begin-search">search</span>
+            <span id="begin-search">搜索</span>
         </div>
         <div class="search-result-container" id="search-result-container">
 
@@ -126,9 +126,24 @@
         <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
         </li> -->
         <li >
+            <span>03-03</span>
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <a href="/posts/44367/">
+                        <span>
+                            koa基础学习笔记
+                        </span>
+            </a>
+            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+        </li>
+        
+        <!-- <li class="listing-item">
+        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+        </li> -->
+        <li >
             <span>02-28</span>
             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2020/02/28/uni-app组件学习笔记/">
+            <a href="/posts/63461/">
                         <span>
                             uni-app组件学习笔记
                         </span>
@@ -143,7 +158,7 @@
         <li >
             <span>02-26</span>
             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2020/02/26/uni-app基础学习笔记/">
+            <a href="/posts/55711/">
                         <span>
                             uni-app基础学习笔记
                         </span>

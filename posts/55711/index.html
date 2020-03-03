@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        uni-app基础学习笔记 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.gif" />
+        </div>
+        <div class="name">
+            <i>hsz199086@163.com</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#uni-app基础学习笔记"><span class="toc-text">uni-app基础学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-uni-app介绍"><span class="toc-text">1. uni-app介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-uni-app编码统一规范"><span class="toc-text">2. uni-app编码统一规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-创建uni-app项目注意事项"><span class="toc-text">3. 创建uni-app项目注意事项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-项目迁移注意事项"><span class="toc-text">4. 项目迁移注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-H5项目迁移至uni-app"><span class="toc-text">(1)  H5项目迁移至uni-app</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-微信小程序转换uni-app指南及转换器：https-ask-dcloud-net-cn-article-35786"><span class="toc-text">(2) 微信小程序转换uni-app指南及转换器：https:&#x2F;&#x2F;ask.dcloud.net.cn&#x2F;article&#x2F;35786</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-关于uni-app生命周期"><span class="toc-text">5. 关于uni-app生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关于uni-app组件注意事项"><span class="toc-text">6. 关于uni-app组件注意事项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-条件编译"><span class="toc-text">7. 条件编译</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-部分常见问题及解决方案（参考官方文档避免官方已指出的不支持写法）"><span class="toc-text">8. 部分常见问题及解决方案（参考官方文档避免官方已指出的不支持写法）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-使用总结"><span class="toc-text">9. 使用总结</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        uni-app基础学习笔记
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-02-26 13:04:15</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="uni-app基础学习笔记"><a href="#uni-app基础学习笔记" class="headerlink" title="uni-app基础学习笔记"></a>uni-app基础学习笔记</h2><h4 id="1-uni-app介绍"><a href="#1-uni-app介绍" class="headerlink" title="1. uni-app介绍"></a>1. uni-app介绍</h4><p>uni-app 是一个使用 Vue.js 开发跨平台应用的前端框架，一套代码可编译到iOS、Android、H5、小程序（微信/支付宝/百度/头条/QQ/钉钉）等多个平台（可以通过条件编译区分各平台特殊代码）。uni-app完整支持vue生命周期和模板语法，如果会vue基本上就可以解决大多数问题了，学习成本非常低。(暂时绕开了原生APP开发相关如nvue，h5+等内容)<br><img src="/images/uni0124.png" alt="uni-app功能框架图"><br>官方演示用例(<a href="https://github.com/dcloudio/hello-uniapp" target="_blank" rel="noopener">https://github.com/dcloudio/hello-uniapp</a> )可快速体验和学习框架的常用组件和案例<br><img src="/images/demoQrCode.png" alt="通用快码"></p>
+<h4 id="2-uni-app编码统一规范"><a href="#2-uni-app编码统一规范" class="headerlink" title="2. uni-app编码统一规范"></a>2. uni-app编码统一规范</h4><ul>
+<li>页面组件遵循Vue 单文件组件 (SFC) 规范  </li>
+<li>组件标签靠近微信小程序规范  </li>
+<li>接口能力（JS API）靠近微信小程序规范  </li>
+<li>数据绑定及事件处理靠近 Vue.js 规范，同时补充了App及页面的生命周期  </li>
+<li>为兼容多端运行，建议使用flex布局进行开发  </li>
+</ul>
+<h4 id="3-创建uni-app项目注意事项"><a href="#3-创建uni-app项目注意事项" class="headerlink" title="3. 创建uni-app项目注意事项"></a>3. 创建uni-app项目注意事项</h4><ul>
+<li>可通过HBuilderX可视化界面、vue-cli命令行两种方式快速创建项目。  </li>
+<li>官方推出的 HBuilderX 编辑器，内置相关环境，开箱即用  </li>
+<li>uni-app在发布到H5时支持所有vue的语法  </li>
+<li>cli版如果想安装less、scss、ts等编译器，需自己手动npm安装。在HBuilderX的插件管理界面安装无效，那个只作用于HBuilderX创建的项目。  </li>
+<li>HBuilderX云打包可以使用Dcloud公用开发者证书进行测试，或者使用自己的开发者证书。  </li>
+</ul>
+<h4 id="4-项目迁移注意事项"><a href="#4-项目迁移注意事项" class="headerlink" title="4. 项目迁移注意事项"></a>4. 项目迁移注意事项</h4><h6 id="1-H5项目迁移至uni-app"><a href="#1-H5项目迁移至uni-app" class="headerlink" title="(1)  H5项目迁移至uni-app"></a>(1)  H5项目迁移至uni-app</h6><ul>
+<li>后缀名是.html，需要改为.vue，并注意遵循vue单文件组件SFC规范</li>
+<li>uni-app默认是小程序的路由方式(pages.json管理页面)，如果使用vue-rooter的话可以使    用uni-simple-router等第三方插件做兼容</li>
+<li>静态文件挪到static目录（静态资源只能存放于此）</li>
+<li>使用scroll-view、swiper等原生组件替换H5组件</li>
+<li>audio组件使用uni.getBackgroundAudioManager()替换</li>
+<li>v-html使用rich-text组件或uparse扩展插件替换</li>
+<li>uni-app非H5端不支持window、navigator、document等web专用对象，使用条件编译区       分</li>
+<li>不支持 *选择器及部分新的css  </li>
+</ul>
+<h6 id="2-微信小程序转换uni-app指南及转换器：https-ask-dcloud-net-cn-article-35786"><a href="#2-微信小程序转换uni-app指南及转换器：https-ask-dcloud-net-cn-article-35786" class="headerlink" title="(2) 微信小程序转换uni-app指南及转换器：https://ask.dcloud.net.cn/article/35786"></a>(2) 微信小程序转换uni-app指南及转换器：<a href="https://ask.dcloud.net.cn/article/35786" target="_blank" rel="noopener">https://ask.dcloud.net.cn/article/35786</a></h6><h4 id="5-关于uni-app生命周期"><a href="#5-关于uni-app生命周期" class="headerlink" title="5. 关于uni-app生命周期"></a>5. 关于uni-app生命周期</h4><p>uni-app 完整支持 Vue 实例的生命周期，此外新增应用生命周期及页面生命周期。</p>
+<table><tr><th colspan="2" style="text-align:left;">应用生命周期</th></tr>
+<tr><td>onLaunch</td><td>初始化完成时触发（全局只触发一次）</td></tr>
+<tr><td>onShow</td><td>启动或从后台进入前台显示时触发</td></tr>
+<tr><td>onHide</td><td>从前台进入后台时触发</td></tr>
+<tr><td>onError</td><td>报错时触发</td></tr>
+<tr><td>onUniNViewMessage</td><td>监听nvue页面发送的数据</td></tr></table>
+注:应用生命周期仅可在App.vue中监听，在其它页面监听无效。在onlaunch生命周期内进行页面的跳转可能会和pages.json内配置的第一个页面跳转冲突,造成白屏，需要进行延时跳转。
+<table style="text-align:left;"><tr><th colspan="2">页面生命周期（部分常用）</th></tr>
+<tr><td>onLoad</td><td>监听页面加载，参数类型为Object，类似微信小程序</td></tr>
+<tr><td>onShow</td><td>监听页面显示，包括从下级页面返回当前页面</td></tr>
+<tr><td>onReady</td><td>监听页面初次渲染完成，如果渲染速度快，会在页面进入动画完成前触发</td></tr>
+<tr><td>onPullDownRefresh</td><td>监听用户下拉动作，一般用于下拉刷新</td></tr>
+<tr><td>onReachBottom</td><td>页面上拉触底事件的处理函数</td></tr>
+<tr><td>onShareAppMessage</td><td>用户点击右上角分享(小程序)</td></tr>
+<tr><td>onBackPress</td><td>监听页面返回(https://ask.dcloud.net.cn/article/35120)</td></tr></table>
+关于.nvue页面(即Native vue)：uni-app App端内置 weex 渲染引擎，提供了原生渲染能力，但是weex提供的api不完整,nuve相当于给weex补充了大量组件和api，以及丰富的Plus API、Native.js、原生插件。(详情: https://ask.dcloud.net.cn/article/36074)
+
+<h4 id="6-关于uni-app组件注意事项"><a href="#6-关于uni-app组件注意事项" class="headerlink" title="6. 关于uni-app组件注意事项"></a>6. 关于uni-app组件注意事项</h4><ul>
+<li>非H5端需要注意Slot不支持scoped，不支持动态组件、异步组件、inline-template、X-Templates、keep-alive、transition</li>
+<li>uni-app 内置了小程序的所有组件，但原生组件上的事件绑定需要以vue语法来写(bindchange=”xxx”等改成@change=”xxx”)</li>
+<li>uni-app组件有命名限制，组件名最好有特殊前缀或后缀(参考: <a href="https://uniapp.dcloud.io/use?id=%e5%91%bd%e5%90%8d%e9%99%90%e5%88%b6" target="_blank" rel="noopener">https://uniapp.dcloud.io/use?id=%e5%91%bd%e5%90%8d%e9%99%90%e5%88%b6</a> )</li>
+<li>uni-app内置了vuex</li>
+<li>uni-app支持小程序自定义组件(wxcomponents目录下)，但是小程序组件的性能不如vue组件，不建议使用,另外小程序自定义组件只能在pages.json中配置 usingComponents,不支持页面引用。(参考:  <a href="https://ask.dcloud.net.cn/article/35786" target="_blank" rel="noopener">https://ask.dcloud.net.cn/article/35786</a> )</li>
+</ul>
+<h4 id="7-条件编译"><a href="#7-条件编译" class="headerlink" title="7. 条件编译"></a>7. 条件编译</h4><ul>
+<li>用特殊的注释作为标记，在编译时根据这些特殊的注释，将注释里面的代码编译到不同平台。uni-app支持ifdef和ifndef(除了xx平台)，多个平台用||连接。例:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#ifdef H5||APP-PLUS</span><br><span class="line">需条件编译的代码</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></li>
+<li>如果想把各平台的页面文件更彻底的分开，也可以在uni-app项目根目录创建platforms目录，然后在下面创建APP-PLUS、MP-WEIXIN等子目录，存放不同平台的文件。</li>
+<li>静态资源按不同平台区分的可在static目录下新建平台目录(注意使用小写，如：mp-weixin等)</li>
+</ul>
+<h4 id="8-部分常见问题及解决方案（参考官方文档避免官方已指出的不支持写法）"><a href="#8-部分常见问题及解决方案（参考官方文档避免官方已指出的不支持写法）" class="headerlink" title="8. 部分常见问题及解决方案（参考官方文档避免官方已指出的不支持写法）"></a>8. 部分常见问题及解决方案（参考官方文档避免官方已指出的不支持写法）</h4><ul>
+<li>各家小程序的浏览器内核不同，会造成css兼容性问题(参考：<a href="https://ask.dcloud.net.cn/article/1318" target="_blank" rel="noopener">https://ask.dcloud.net.cn/article/1318</a> )</li>
+<li>各家小程序存在不一样的支持度(如：支付宝小程序不支持ECharts，百度小程序不支持v-if和for同时使用)，遇到相关问题可关注是否有相应版本更新或使用条件编译来不同平台不同处理。</li>
+<li>微信小程序端的原生组件存在层级问题，可以用cover-view、cover-image来进行覆盖</li>
+<li>uni-app中可以使用upx作为自适应单位，但不支持动态绑定，可以使用uni.upx2px转化为px。</li>
+<li>关于Class 与 Style 绑定，非H5端支持简单的样式绑定，绑定的值只能是字符串，不支持复杂的绑定，比如:class=”[class-a,class-b]”</li>
+</ul>
+<h4 id="9-使用总结"><a href="#9-使用总结" class="headerlink" title="9. 使用总结"></a>9. 使用总结</h4><ul>
+<li>uni-app官方文档( <a href="https://uniapp.dcloud.io/README" target="_blank" rel="noopener">https://uniapp.dcloud.io/README</a> )非常详细，对于初学和使用uni-app非常有帮助</li>
+<li>因基本完整支持vue的语法及特性,uni-app的学习成本很低</li>
+<li>对于跨端uni-app最好是以小程序的编码方式为主向其他端扩展，参考以上第3条H5项目迁移至uni-app</li>
+<li>开发工具官方推荐HBuilderX，对于惯用Sublime/Atom等编辑器的开发者可以平滑过渡，其他开发者使用vue-cli的方式也很方便，但是仍然需要HbuilderX打包到安卓/IOS(无需打包原生APP的忽略)</li>
+<li>目前uni-app插件市场( <a href="https://ext.dcloud.net.cn/" target="_blank" rel="noopener">https://ext.dcloud.net.cn/</a> )有1K+第三方插件，但是质量良莠不齐只能筛选后使用和参考</li>
+<li>uni-app支持使用npm安装第三方包，但是为多端兼容考虑应优先从uni-app插件市场获取插件，直接从npm下载库很容易只兼容H5端，当然也可使用条件编译将该部分特殊处理</li>
+</ul>
+<p>总体来说uni-app是一个非常好的跨平台开发框架，框架本身的文档也非常详细，但是目前开放生态并不是很完善，很多第三方插件文档也很模糊，如果单纯只开发某一个平台的代码可以绕开uni-app，但是如果是跨端需求则非常适合用uni-app，因为使用条件编译进行各平台的独有代码开发也没有增加工作量。uni-app在跨端抹平度、扩展灵活性、性能体验、学习成本、开发成本等方面都非常优秀(官方说的8个指标虽有广告成分但也确实很优秀)。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

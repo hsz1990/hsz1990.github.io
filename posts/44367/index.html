@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        koa基础学习笔记 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.gif" />
+        </div>
+        <div class="name">
+            <i>hsz199086@163.com</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#koa基础学习笔记"><span class="toc-text">koa基础学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-koa概况"><span class="toc-text">1.koa概况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-中间件"><span class="toc-text">2.中间件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-重要的对象及函数"><span class="toc-text">3.重要的对象及函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-常用中间件"><span class="toc-text">4.常用中间件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-错误处理"><span class="toc-text">5.错误处理</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        koa基础学习笔记
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-03 15:34:59</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="koa基础学习笔记"><a href="#koa基础学习笔记" class="headerlink" title="koa基础学习笔记"></a>koa基础学习笔记</h2><h4 id="1-koa概况"><a href="#1-koa概况" class="headerlink" title="1.koa概况"></a>1.koa概况</h4><p>Koa 是一个简单好用的nojdejs web框架。它的特点是优雅、简洁、表达力强、自由度高。本身代码极简，所有功能都通过插件实现。<br>koa1.x和koa2.x两个区别比较大，koa1.x使用generator控制项目同步，koa2.x使用ES7的async函数。大部分的中间件目前已经做了针对koa2.x的兼容。没有做兼容的中间件，可以使用 koa-convert中间件把generator转化一下。例: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const convert &#x3D; require(&#39;koa-convert&#39;);</span><br><span class="line">const staticCache &#x3D; require(&#39;koa-static-cache&#39;);</span><br><span class="line">app.use(convert(staticCache(path.join(__dirname, &#39;public&#39;), &#123; maxAge: 365 * 24 * 60 * 60 &#125;)));</span><br></pre></td></tr></table></figure>
+
+<p>基本用法 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const Koa &#x3D; require(&#39;koa&#39;);</span><br><span class="line">const app &#x3D; new Koa();</span><br><span class="line">app.use((ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#96;$&#123;Date.now()&#125; $&#123;ctx.request.method&#125; $&#123;ctx.request.url&#125;&#96;);</span><br><span class="line">	next();</span><br><span class="line">&#125;);</span><br><span class="line">app.use(async ctx &#x3D;&gt; &#123;</span><br><span class="line">  ctx.body &#x3D; &#39;Hello World&#39;;</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-中间件"><a href="#2-中间件" class="headerlink" title="2.中间件"></a>2.中间件</h4><p>Koa所有功能都使用中间件（middleware）来实现。每个中间件默认接受两个参数，第一个参数是Context对象，第二个参数是next函数。只要调用next函数，就可以把执行权转交给下一个中间件。多个中间件会形成一个栈结构（middle stack），以”先进后出”（first-in-last-out）的顺序执行。<br><img src="/images/72150-0e1846c8c7bdf999.webp" alt="中间件的洋葱结构">  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const one &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; one&#39;);</span><br><span class="line">	next();</span><br><span class="line">	console.log(&#39;&lt;&lt; one&#39;);</span><br><span class="line">&#125;</span><br><span class="line">const two &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; two&#39;);</span><br><span class="line">	next(); </span><br><span class="line">	console.log(&#39;&lt;&lt; two&#39;);</span><br><span class="line">&#125;</span><br><span class="line">const three &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; three&#39;);</span><br><span class="line">	next();</span><br><span class="line">	console.log(&#39;&lt;&lt; three&#39;);</span><br><span class="line">&#125;</span><br><span class="line">app.use(one);</span><br><span class="line">app.use(two);</span><br><span class="line">app.use(three);</span><br></pre></td></tr></table></figure>
+
+<p>如果中间件内部没有调用next函数，那么执行权就不会传递下去。<br><img src="/images/2020-03-03-18-44-49.png" alt="运行效果"><br>注释two后<br><img src="/images/2020-03-03-18-44-27.png" alt="运行效果">  </p>
+<h4 id="3-重要的对象及函数"><a href="#3-重要的对象及函数" class="headerlink" title="3.重要的对象及函数"></a>3.重要的对象及函数</h4><ul>
+<li>next<br>next函数主要负责将控制权交给下一个中间件，如果当前中间件没有终结请求，并且next没有被调用，那么当前中间件的请求将被挂起，等到next()后的中间件执行完再返回继续执行。  </li>
+<li>ctx.res<br>Node 的 response 对象。<br>Koa不支持直接调用底层res进行响应处理，避免使用res.statusCode、res.writeHead()、res.write()、res.end()    </li>
+<li>response.body=<br>String: Content-Type默认为text/html或者text/plain，两种默认charset均为utf-8。 Content-Length 同时会被设置。<br>Buffer: Content-Type默认为application/octet-stream，Content-Length同时被设置。<br>Stream: Content-Type默认为application/octet-stream。<br>Object: Content-Type默认为application/json。这包括普通对象{ foo: ‘bar’ }和数组[‘foo’, ‘bar’]。<br>当stream被设置为响应体时，.onerror将作为监听器自动添加到错误事件中以捕获任何错误。此外，每当请求被关闭（甚至更早）时，stream都将被销毁。如果不想要这两个功能，请不要直接将stream设置为响应体。<br>如果res.status没有赋值，Koa会自动设置为200或204。  </li>
+<li>app.listen  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server.listen(handle[, backlog][, callback])</span><br><span class="line">server.listen(options[, callback])</span><br><span class="line">server.listen(path[, backlog][, callback]) 用于 IPC 服务器。</span><br><span class="line">server.listen([port[, host[, backlog]]][, callback]) 用于 TCP 服务器。</span><br></pre></td></tr></table></figure>
+
+<p>这个函数是异步的。当服务器开始监听时，会触发 ‘listening’ 事件。 最后一个参数 callback 将被添加为 ‘listening’ 事件的监听器。<br>所有的 listen() 方法都可以使用一个 backlog 参数来指定待连接队列的最大长度。 实际的长度将由操作系统的 sysctl 设置决定。此参数的默认值是 511<br>当且仅当上次调用 server.listen() 发生错误或已经调用 server.close() 时，才能再次调用 server.listen() 方法。<br>path是IPC连接的识别路径( <a href="http://nodejs.cn/api/net.html#net_identifying_paths_for_ipc_connections" target="_blank" rel="noopener">http://nodejs.cn/api/net.html#net_identifying_paths_for_ipc_connections</a> )  </p>
+<h4 id="4-常用中间件"><a href="#4-常用中间件" class="headerlink" title="4.常用中间件"></a>4.常用中间件</h4><ul>
+<li>表单处理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const koaBody &#x3D; require(&#39;koa-body&#39;);</span><br><span class="line">const main &#x3D; async function(ctx) &#123;</span><br><span class="line">	const body &#x3D; ctx.request.body;</span><br><span class="line">	if (!body.name) ctx.throw(400, &#39;.name required&#39;);</span><br><span class="line">	ctx.body &#x3D; &#123; name: body.name &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">app.use(koaBody());</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>文件上传</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const os &#x3D; require(&#39;os&#39;);</span><br><span class="line">const path &#x3D; require(&#39;path&#39;);</span><br><span class="line">const koaBody &#x3D; require(&#39;koa-body&#39;);</span><br><span class="line">const main &#x3D; async function(ctx) &#123;</span><br><span class="line">	const tmpdir &#x3D; os.tmpdir();</span><br><span class="line">	const filePaths &#x3D; [];</span><br><span class="line">	const files &#x3D; ctx.request.body.files || &#123;&#125;;</span><br><span class="line">	for (let key in files) &#123;</span><br><span class="line">    	const file &#x3D; files[key];</span><br><span class="line">    	const filePath &#x3D; path.join(tmpdir, file.name);</span><br><span class="line">    	const reader &#x3D; fs.createReadStream(file.path);</span><br><span class="line">    	const writer &#x3D; fs.createWriteStream(filePath);</span><br><span class="line">    	reader.pipe(writer);</span><br><span class="line">    	filePaths.push(filePath);</span><br><span class="line">  	&#125;</span><br><span class="line"> 		ctx.body &#x3D; filePaths;</span><br><span class="line">&#125;;</span><br><span class="line">app.use(koaBody(&#123; multipart: true &#125;));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>路由</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  	var route &#x3D; require(&#39;koa-route&#39;);</span><br><span class="line">&#x2F;&#x2F;引入中间件之后支持的写法差不多，只是路径传入route，然后把route作为中间件挂载到app</span><br><span class="line">app.use(route.get(&#39;&#x2F;&#39;, list));</span><br><span class="line">app.use(route.get(&#39;&#x2F;post&#x2F;new&#39;, add));</span><br><span class="line">app.use(route.get(&#39;&#x2F;post&#x2F;:id&#39;, show));</span><br><span class="line">app.use(route.post(&#39;&#x2F;post&#39;, create));</span><br><span class="line">&#x2F;&#x2F;链式写法</span><br><span class="line">var router &#x3D; require(&#39;koa-router&#39;)();</span><br><span class="line">router.get(&#39;&#x2F;&#39;, list)</span><br><span class="line">    .get(&#39;&#x2F;post&#x2F;new&#39;, add)</span><br><span class="line">    .get(&#39;&#x2F;post&#x2F;:id&#39;, show)</span><br><span class="line">    .post(&#39;&#x2F;post&#39;, create);</span><br><span class="line">app.use(router.routes())</span><br><span class="line">   .use(router.allowedMethods());</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>网页模板</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var views &#x3D; require(&#39;co-views&#39;);</span><br><span class="line">var render &#x3D; views(&#39;tpls&#39;, &#123;</span><br><span class="line">    map: &#123; html: &#39;swig&#39; &#125;,&#x2F;&#x2F;html后缀使用引擎</span><br><span class="line">    default: &quot;jade&quot;&#x2F;&#x2F;render不提供后缀名时</span><br><span class="line">&#125;);</span><br><span class="line">var userInfo &#x3D; &#123;</span><br><span class="line">    name: &#39;tobi&#39;,</span><br><span class="line">    species: &#39;ferret&#39;</span><br><span class="line">&#125;;</span><br><span class="line">var html;</span><br><span class="line">html &#x3D; render(&#39;user&#39;, &#123; user: userInfo &#125;);</span><br><span class="line">html &#x3D; render(&#39;user.jade&#39;, &#123; user: userInfo &#125;);</span><br><span class="line">html &#x3D; render(&#39;user.ejs&#39;, &#123; user: userInfo &#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-错误处理"><a href="#5-错误处理" class="headerlink" title="5.错误处理"></a>5.错误处理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">const Koa &#x3D; require(&#39;koa&#39;);</span><br><span class="line">const app &#x3D; new Koa();</span><br><span class="line">&#x2F;&#x2F; 错误处理中间件, 洋葱最外层</span><br><span class="line">app.use(async (ctx, next)&#x3D;&gt;&#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        await next();</span><br><span class="line">    &#125; catch (error) &#123;</span><br><span class="line">        &#x2F;&#x2F; 响应用户</span><br><span class="line">        ctx.status &#x3D; error.statusCode || error.status || 500;</span><br><span class="line">        ctx.body &#x3D; error.message;</span><br><span class="line">        ctx.app.emit(&#39;error&#39;, error); &#x2F;&#x2F; 触发应用层级错误事件</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">app.use(async (ctx, next)&#x3D;&gt;&#123;</span><br><span class="line">    console.log(&quot;前置操作&quot;);</span><br><span class="line">    await next();</span><br><span class="line">    console.log(&quot;后置操作&quot;);</span><br><span class="line">&#125;);</span><br><span class="line">app.use(ctx&#x3D;&gt;&#123;</span><br><span class="line">    &#x2F;&#x2F; 抛出错误, 也可以理解为模拟错误发生</span><br><span class="line">    throw new Error(&quot;未知错误&quot;);</span><br><span class="line">    console.log(&quot;执行任务...&quot;);</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F; 全局错误事件监听</span><br><span class="line">app.on(&#39;error&#39;, (error)&#x3D;&gt;&#123;</span><br><span class="line">    console.error(error);</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F; 语法糖, 等同于http.createServer(app.callback()).listen(3000);</span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
