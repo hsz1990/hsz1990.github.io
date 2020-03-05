@@ -11,7 +11,7 @@
 
     <title>
         
-        koa基础学习笔记 - undefined
+        Hexo
         
     </title>
 
@@ -82,6 +82,13 @@
                 </a>
             </li>
             
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
         </ul>
     </div>
     
@@ -138,7 +145,10 @@
 <h4 id="2-中间件"><a href="#2-中间件" class="headerlink" title="2.中间件"></a>2.中间件</h4><p>Koa所有功能都使用中间件（middleware）来实现。每个中间件默认接受两个参数，第一个参数是Context对象，第二个参数是next函数。只要调用next函数，就可以把执行权转交给下一个中间件。多个中间件会形成一个栈结构（middle stack），以”先进后出”（first-in-last-out）的顺序执行。<br><img src="/images/72150-0e1846c8c7bdf999.webp" alt="中间件的洋葱结构">  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const one &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; one&#39;);</span><br><span class="line">	next();</span><br><span class="line">	console.log(&#39;&lt;&lt; one&#39;);</span><br><span class="line">&#125;</span><br><span class="line">const two &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; two&#39;);</span><br><span class="line">	next(); </span><br><span class="line">	console.log(&#39;&lt;&lt; two&#39;);</span><br><span class="line">&#125;</span><br><span class="line">const three &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; three&#39;);</span><br><span class="line">	next();</span><br><span class="line">	console.log(&#39;&lt;&lt; three&#39;);</span><br><span class="line">&#125;</span><br><span class="line">app.use(one);</span><br><span class="line">app.use(two);</span><br><span class="line">app.use(three);</span><br></pre></td></tr></table></figure>
 
-<p>如果中间件内部没有调用next函数，那么执行权就不会传递下去。<br><img src="/images/2020-03-03-18-44-49.png" alt="运行效果"><br>注释two后<br><img src="/images/2020-03-03-18-44-27.png" alt="运行效果">  </p>
+<p>如果中间件内部没有调用next函数，那么执行权就不会传递下去。<br><img src="/images/2020-03-03-18-44-49.png" alt="运行效果"><br>注释two后<br><img src="/images/2020-03-03-18-44-27.png" alt="运行效果"><br>异步中间件与同步中间件混合使用时，注意next之后的代码执行顺序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">const Koa &#x3D; require(&#39;koa&#39;);</span><br><span class="line">const app &#x3D; new Koa();</span><br><span class="line">const logger &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#96;$&#123;Date.now()&#125; $&#123;ctx.request.method&#125; $&#123;ctx.request.url&#125;&#96;);</span><br><span class="line">	next();</span><br><span class="line">&#125;</span><br><span class="line">const one &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; one&#39;);</span><br><span class="line">	next();</span><br><span class="line">	console.log(&#39;&lt;&lt; one&#39;);</span><br><span class="line">&#125;</span><br><span class="line">const two &#x3D; async (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; two&#39;);</span><br><span class="line">	await next(); </span><br><span class="line">	console.log(&#39;&lt;&lt; two&#39;);</span><br><span class="line">&#125;</span><br><span class="line">const three &#x3D; (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; three&#39;);</span><br><span class="line">	next();</span><br><span class="line">	console.log(&#39;&lt;&lt; three&#39;);</span><br><span class="line">&#125;</span><br><span class="line">const four &#x3D; async (ctx, next) &#x3D;&gt; &#123;</span><br><span class="line">	console.log(&#39;&gt;&gt; four&#39;);</span><br><span class="line">	await next();</span><br><span class="line">	console.log(&#39;&lt;&lt; four&#39;);</span><br><span class="line">	ctx.body &#x3D; &#39;tets.......&#39;</span><br><span class="line">&#125;</span><br><span class="line">app.use(logger);</span><br><span class="line">app.use(one);</span><br><span class="line">app.use(two);</span><br><span class="line">app.use(three);</span><br><span class="line">app.use(four);</span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/2020-03-04-13-07-20.png" alt="运行效果"></p>
 <h4 id="3-重要的对象及函数"><a href="#3-重要的对象及函数" class="headerlink" title="3.重要的对象及函数"></a>3.重要的对象及函数</h4><ul>
 <li>next<br>next函数主要负责将控制权交给下一个中间件，如果当前中间件没有终结请求，并且next没有被调用，那么当前中间件的请求将被挂起，等到next()后的中间件执行完再返回继续执行。  </li>
 <li>ctx.res<br>Node 的 response 对象。<br>Koa不支持直接调用底层res进行响应处理，避免使用res.statusCode、res.writeHead()、res.write()、res.end()    </li>
@@ -218,15 +228,15 @@
 
 <script>
     // We expose some of the variables needed by the front end
-    window.hexo_search_path = ""
+    window.hexo_search_path = "search.xml"
     window.hexo_root = "/"
     window.isPost = true
 </script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 <script src="/js/index.js"></script>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="/js/busuanzi.pure.mini.js"></script>
 
 
 
