@@ -89,6 +89,10 @@ body {
 .no-indent ol {
   text-indent: 0 !important;
 }
+.no-indent ul li,
+.no-indent ol li {
+  text-indent: 0 !important;
+}
 .nav {
   position: relative;
   padding-top: 50px;

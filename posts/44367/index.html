@@ -144,7 +144,7 @@
 </span>
 </span>
     </div>
-    <div class="post-content ">
+    <div class="post-content no-indent">
         <h2 id="koa基础学习笔记"><a href="#koa基础学习笔记" class="headerlink" title="koa基础学习笔记"></a>koa基础学习笔记</h2><h4 id="1-koa概况"><a href="#1-koa概况" class="headerlink" title="1.koa概况"></a>1.koa概况</h4><p>Koa 是一个简单好用的nodejs web框架。它的特点是优雅、简洁、表达力强、自由度高。本身代码极简，所有功能都通过插件实现。<br>koa1.x和koa2.x两个区别比较大，koa1.x使用generator控制项目同步，koa2.x使用ES7的async函数。大部分的中间件目前已经做了针对koa2.x的兼容。没有做兼容的中间件，可以使用 koa-convert中间件把generator转化一下。例: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const convert &#x3D; require(&#39;koa-convert&#39;);</span><br><span class="line">const staticCache &#x3D; require(&#39;koa-static-cache&#39;);</span><br><span class="line">app.use(convert(staticCache(path.join(__dirname, &#39;public&#39;), &#123; maxAge: 365 * 24 * 60 * 60 &#125;)));</span><br></pre></td></tr></table></figure>
 
