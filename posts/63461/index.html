@@ -156,125 +156,18 @@
 <li>通过CLI创建项目<br><code>vue create -p dcloudio/uni-preset-vue my-test</code></li>
 <li>选择默认模板新建一个空项目<br><img src="/images/h5-cli-01.png" alt="选择模板">  </li>
 <li>以H5方式运行项目  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd my-test</span><br><span class="line">npm run serve</span><br></pre></td></tr></table></figure>
-
-</li>
+(由于写文时条件限制我的电脑是linux系统，没有安装微信/支付宝等开发者工具，以下运行效果图皆只有H5平台，后续补充)</li>
 </ul>
-<p>(由于写文时条件限制我的电脑是linux系统，没有安装微信/支付宝等开发者工具，以下运行效果图皆只有H5平台，后续补充)  </p>
-<h4 id="1-uni-app组件"><a href="#1-uni-app组件" class="headerlink" title="1. uni-app组件"></a>1. uni-app组件</h4><p>uni-app组件大致分为内置组件、官方扩展组件、第三方uni-app插件，几乎所有组件都有各自自定义的属性，可以对该组件的功能或样式进行修饰  </p>
+<h4 id="1-uni-app组件"><a href="#1-uni-app组件" class="headerlink" title="1. uni-app组件"></a>1. uni-app组件</h4><p>uni-app组件大致分为内置组件、官方扩展组件、第三方uni-app插件，几乎所有组件都有各自自定义的属性，可以对该组件的功能或样式进行修饰</p>
 <ul>
-<li>uni-app内置组件是最常用的，与微信内置组件相同。基础组件分为以下八大类（以下列出部分组件的注意点）：  </li>
+<li>uni-app内置组件是最常用的，与微信内置组件相同。基础组件分为以下八大类（以下列出部分组件的注意点）：</li>
 </ul>
-<table>
-    <tr>
-        <th>类别</th>
-        <th>组件</th>
-        <th>描述及注意事项</th>
-    </tr >
-    <tr >
-        <td rowspan="3">视图容器</td>
-        <td>view</td>
-        <td>视图容器，类似于HTML中的div</td>
-    </tr>
-    <tr>
-        <td>scroll-view</td>
-        <td>
-            1.scroll-view 不适合放长列表，有性能问题。长列表滚动和下拉刷新，应该使用原生导航栏搭配页面级的滚动和下拉刷新实现。<br/>
-            2.scroll-view是区域滚动，不会触发页面滚动，无法触发pages.json配置的下拉刷新、页面触底onReachBottomDistance、titleNView的transparent透明渐变。
-        </td>
-    </tr>
-    <tr>
-        <td>swiper</td>
-        <td>
-                1.swiper是单页组件，适合做banner图轮播和简单列表左右滑动。<br/>
-                2.因为性能问题，swiper不适合做复杂的长列表。
-        </td>
-    </tr>
-    <tr>
-        <td rowspan="4">基础内容组件</td>
-        <td>icon</td>
-        <td>图标</td>
-    </tr>
-    <tr>
-        <td>text</td>
-        <td>
-            1.组件内只支持嵌套text组件，不支持其它组件或自定义组件，否则会引发在不同平台的渲染差异。
-            2.支持 \n 方式换行。
-        </td>
-    </tr>
-    <tr>
-        <td>rich-text</td>
-        <td>富文本,支付宝小程序 nodes 属性只支持使用 Array 类型</td>
-    </tr>
-    <tr>
-        <td>progress</td>
-        <td>进度条</td>
-    </tr>
-    <tr>
-        <td rowspan="2">表单组件</td>
-        <td>picker</td>
-        <td>弹出式列表选择器</td>
-    </tr>
-    <tr>
-        <td>picker-view</td>
-        <td>窗体内嵌式列表选择器</td>
-    </tr>
-    <tr>
-        <td >导航</td>
-        <td >navigator</td>
-        <td>页面链接。类似于HTML中的a标签</td>
-    </tr>
-    <tr>
-        <td rowspan="3" >媒体组件</td>
-        <td >audio</td>
-        <td>不再维护，使用uni.createInnerAudioContext 替代</td>
-    </tr>
-    <tr>
-        <td >live-player</td>
-        <td>直播播放</td>
-    </tr>
-    <tr>
-        <td >live-pusher</td>
-        <td>实时音视频录制，也称直播推流</td>
-    </tr>
-    <tr>
-        <td >媒体组件</td>
-        <td >audio</td>
-        <td>不再维护，使用uni.createInnerAudioContext 替代</td>
-    </tr>
-    <tr>
-        <td >地图</td>
-        <td >map</td>
-        <td>
-            组件的宽/高推荐写直接量，比如：750rpx，不要设置百分比值。<br/>
-            uni-app 只支持 gcj02 坐标
-        </td>
-    </tr>
-    <tr>
-        <td >画布</td>
-        <td >canvas</td>
-        <td>
-            1.默认宽度300px、高度 225px，大小后需要重新绘制<br/>
-            2.同一页面中的 canvas-id 不可重复,否则画布将被隐藏<br/>
-            3.微信、百度、QQ小程序中层级高于前端组件,不可内嵌在 scroll-view、swiper、picker-view、movable-view 中使用
-        </td>
-    </tr>
-     <tr>
-        <td >webview</td>
-        <td >web-view</td>
-        <td>
-            1.小程序仅支持加载网络网页，不支持本地html<br/>
-            2.小程序端 web-view 组件一定有原生导航栏，下面一定是全屏的 web-view 组件，navigationStyle: custom 对 web-view 组件无效。
-        </td>
-    </tr>
-</table>
-每个组件都有其特定的属性，详细
-+ uni-app扩展组件(即uni-ui)是DCloud提供的一个跨端ui库，它是基于vue组件的、flex布局的、无dom的跨全端ui框架,它是基础组件的补充。  
-   如果创建项目时没有选择`hello uni-app`模板，则可使用npm引入uni-ui  
-   `npm install @dcloudio/uni-ui`  
-   uni-ui目前小程序和混合app领域，暂时还没有比uni ui更高性能的框架。在满足业务条件的情况下不要使用自定义组件。 
-   注:uni-ui 不支持使用 Vue.use() 的方式安装
-+ uni-app第三方插件市场及本地自定义组件是对以上两种组件的补充
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;th&gt;类别&lt;&#x2F;th&gt;</span><br><span class="line">        &lt;th&gt;组件&lt;&#x2F;th&gt;</span><br><span class="line">        &lt;th&gt;描述及注意事项&lt;&#x2F;th&gt;</span><br><span class="line">    &lt;&#x2F;tr &gt;</span><br><span class="line">    &lt;tr &gt;</span><br><span class="line">        &lt;td rowspan&#x3D;&quot;3&quot;&gt;视图容器&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;view&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;视图容器，类似于HTML中的div&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;scroll-view&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;</span><br><span class="line">            1.scroll-view 不适合放长列表，有性能问题。长列表滚动和下拉刷新，应该使用原生导航栏搭配页面级的滚动和下拉刷新实现。&lt;br&#x2F;&gt;</span><br><span class="line">            2.scroll-view是区域滚动，不会触发页面滚动，无法触发pages.json配置的下拉刷新、页面触底onReachBottomDistance、titleNView的transparent透明渐变。</span><br><span class="line">        &lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;swiper&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;</span><br><span class="line">                1.swiper是单页组件，适合做banner图轮播和简单列表左右滑动。&lt;br&#x2F;&gt;</span><br><span class="line">                2.因为性能问题，swiper不适合做复杂的长列表。</span><br><span class="line">        &lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td rowspan&#x3D;&quot;4&quot;&gt;基础内容组件&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;icon&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;图标&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;text&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;</span><br><span class="line">            1.组件内只支持嵌套text组件，不支持其它组件或自定义组件，否则会引发在不同平台的渲染差异。</span><br><span class="line">            2.支持 \n 方式换行。</span><br><span class="line">        &lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;rich-text&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;富文本,支付宝小程序 nodes 属性只支持使用 Array 类型&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;progress&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;进度条&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td rowspan&#x3D;&quot;2&quot;&gt;表单组件&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;picker&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;弹出式列表选择器&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;picker-view&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;窗体内嵌式列表选择器&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td &gt;导航&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td &gt;navigator&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;页面链接。类似于HTML中的a标签&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td rowspan&#x3D;&quot;3&quot; &gt;媒体组件&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td &gt;audio&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;不再维护，使用uni.createInnerAudioContext 替代&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td &gt;live-player&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;直播播放&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td &gt;live-pusher&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;实时音视频录制，也称直播推流&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td &gt;媒体组件&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td &gt;audio&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;不再维护，使用uni.createInnerAudioContext 替代&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td &gt;地图&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td &gt;map&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;</span><br><span class="line">            组件的宽&#x2F;高推荐写直接量，比如：750rpx，不要设置百分比值。&lt;br&#x2F;&gt;</span><br><span class="line">            uni-app 只支持 gcj02 坐标</span><br><span class="line">        &lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td &gt;画布&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td &gt;canvas&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;</span><br><span class="line">            1.默认宽度300px、高度 225px，大小后需要重新绘制&lt;br&#x2F;&gt;</span><br><span class="line">            2.同一页面中的 canvas-id 不可重复,否则画布将被隐藏&lt;br&#x2F;&gt;</span><br><span class="line">            3.微信、百度、QQ小程序中层级高于前端组件,不可内嵌在 scroll-view、swiper、picker-view、movable-view 中使用</span><br><span class="line">        &lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">     &lt;tr&gt;</span><br><span class="line">        &lt;td &gt;webview&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td &gt;web-view&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;td&gt;</span><br><span class="line">            1.小程序仅支持加载网络网页，不支持本地html&lt;br&#x2F;&gt;</span><br><span class="line">            2.小程序端 web-view 组件一定有原生导航栏，下面一定是全屏的 web-view 组件，navigationStyle: custom 对 web-view 组件无效。</span><br><span class="line">        &lt;&#x2F;td&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>uni-app扩展组件(即uni-ui)是DCloud提供的一个跨端ui库，它是基于vue组件的、flex布局的、无dom的跨全端ui框架,它是基础组件的补充。<br> 如果创建项目时没有选择<code>hello uni-app</code>模板，则可使用npm引入uni-ui<br> <code>npm install @dcloudio/uni-ui</code><br> uni-ui目前小程序和混合app领域，暂时还没有比uni ui更高性能的框架。在满足业务条件的情况下不要使用自定义组件。<br> 注:uni-ui 不支持使用 Vue.use() 的方式安装</li>
+<li>uni-app第三方插件市场及本地自定义组件是对以上两种组件的补充</li>
+</ul>
 <h4 id="2-vue组件"><a href="#2-vue组件" class="headerlink" title="2. vue组件"></a>2. vue组件</h4><p>uni-app只支持vue单文件组件,所以在使用第三方组件如：npm引入某组件的时候应注意。有些原生vue支持的组件在uni-app中是错误的组件,例如： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; uni-app不支持的组件</span><br><span class="line">&#x2F;&#x2F;  1.动态组件</span><br><span class="line">&lt;component v-bind:is&#x3D;&quot;currentTabComponent&quot;&gt;&lt;&#x2F;component&gt;</span><br><span class="line">&#x2F;&#x2F;  2.异步组件</span><br><span class="line">Vue.component(&#39;async-example&#39;, function (resolve, reject) &#123;</span><br><span class="line">  setTimeout(function () &#123;</span><br><span class="line">    resolve(&#123;</span><br><span class="line">      template: &#39;&lt;div&gt;I am async!&lt;&#x2F;div&gt;&#39;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; 3.包含自定义render的组件</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    ...</span><br><span class="line">    export default &#123;</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123; &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">        render (createElement) &#123;</span><br><span class="line">            return createElement(...)</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 
@@ -284,7 +177,7 @@
 <li>解压后将goods-nav目录放置在component目录下</li>
 <li>引入插件、注册、使用，与常规vue开发一模一样</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">   &lt;template&gt;</span><br><span class="line">    &lt;view&gt;</span><br><span class="line">        &lt;view class&#x3D;&quot;goods-carts&quot;&gt;</span><br><span class="line">            &lt;uni-goods-nav :options&#x3D;&quot;options&quot; :button-group&#x3D;&quot;buttonGroup&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import uniGoodsNav from &#39;@&#x2F;components&#x2F;uni-goods-nav&#x2F;uni-goods-nav.vue&#39;</span><br><span class="line">    export default &#123;</span><br><span class="line">        components: &#123; uniGoodsNav &#125;,</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                options: [&#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;kefu.png&#39;,</span><br><span class="line">                    text: &#39;客服&#39;</span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;dianpu.png&#39;,</span><br><span class="line">                    text: &#39;店铺&#39;</span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;carts.png&#39;,</span><br><span class="line">                    text: &#39;购物车&#39;,</span><br><span class="line">                    info: 2</span><br><span class="line">                &#125;],</span><br><span class="line">                buttonGroup: [&#123;</span><br><span class="line">                        text: &#39;加入购物车&#39;,</span><br><span class="line">                        backgroundColor: &#39;#ffa200 &#39;,</span><br><span class="line">                        color: &#39;#fff&#39;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        text: &#39;立即购买&#39;,</span><br><span class="line">                        backgroundColor: &#39;#ff0000&#39;,</span><br><span class="line">                        color: &#39;#fff&#39;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;view&gt;</span><br><span class="line">        &lt;view class&#x3D;&quot;goods-carts&quot;&gt;</span><br><span class="line">            &lt;uni-goods-nav :options&#x3D;&quot;options&quot; :button-group&#x3D;&quot;buttonGroup&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import uniGoodsNav from &#39;@&#x2F;components&#x2F;uni-goods-nav&#x2F;uni-goods-nav.vue&#39;</span><br><span class="line">    export default &#123;</span><br><span class="line">        components: &#123; uniGoodsNav &#125;,</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                options: [&#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;kefu.png&#39;,</span><br><span class="line">                    text: &#39;客服&#39;</span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;dianpu.png&#39;,</span><br><span class="line">                    text: &#39;店铺&#39;</span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;carts.png&#39;,</span><br><span class="line">                    text: &#39;购物车&#39;,</span><br><span class="line">                    info: 2</span><br><span class="line">                &#125;],</span><br><span class="line">                buttonGroup: [&#123;</span><br><span class="line">                        text: &#39;加入购物车&#39;,</span><br><span class="line">                        backgroundColor: &#39;#ffa200 &#39;,</span><br><span class="line">                        color: &#39;#fff&#39;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        text: &#39;立即购买&#39;,</span><br><span class="line">                        backgroundColor: &#39;#ff0000&#39;,</span><br><span class="line">                        color: &#39;#fff&#39;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 
 <p>使用方式2： 与方式1一样，但使用组件时与小程序一样在pages.json中引入组件  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;path&quot;: &quot;subPages&#x2F;demo&#x2F;uni-goods-nav&quot;,</span><br><span class="line">    &quot;style&quot;: &#123;</span><br><span class="line">            &quot;navigationBarTitleText&quot;: &quot;购物车&quot;,</span><br><span class="line">            &quot;usingComponents&quot;: &#123;</span><br><span class="line">            &quot;uni-goods-nav&quot;: &quot;&#x2F;components&#x2F;uni-goods-nav&#x2F;uni-goods-nav&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
