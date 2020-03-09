@@ -93,7 +93,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#uni-app中的各种组件"><span class="toc-text">uni-app中的各种组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-uni-app组件"><span class="toc-text">1. uni-app组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-vue组件"><span class="toc-text">2. vue组件</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#uni-app中的各种组件"><span class="toc-text">uni-app中的各种组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-uni-app组件"><span class="toc-text">1. uni-app组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-vue组件"><span class="toc-text">2. vue组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-微信小程序组件"><span class="toc-text">3. 微信小程序组件</span></a></li></ol></li></ol></li></ol>
 </div>
     
 </div>
@@ -270,145 +270,41 @@
    注:uni-ui 不支持使用 Vue.use() 的方式安装
 + uni-app第三方插件市场及本地自定义组件是对以上两种组件的补充
 
-<h4 id="2-vue组件"><a href="#2-vue组件" class="headerlink" title="2. vue组件"></a>2. vue组件</h4><p>uni-app只支持vue单文件组件,所以在使用第三方组件如：npm引入某组件的时候应注意。有些原生vue支持的组件在uni-app中是错误的组件,例如：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; uni-app不支持的组件</span><br><span class="line">&#x2F;&#x2F;  1.动态组件</span><br><span class="line">&lt;component v-bind:is&#x3D;&quot;currentTabComponent&quot;&gt;&lt;&#x2F;component&gt;</span><br><span class="line">&#x2F;&#x2F;  2.异步组件</span><br><span class="line">Vue.component(&#39;async-example&#39;, function (resolve, reject) &#123;</span><br><span class="line">  setTimeout(function () &#123;</span><br><span class="line">    resolve(&#123;</span><br><span class="line">      template: &#39;&lt;div&gt;I am async!&lt;&#x2F;div&gt;&#39;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; 3.包含自定义render的组件</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    ...</span><br><span class="line">    export default &#123;</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123; &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">        render (createElement) &#123;</span><br><span class="line">            return createElement(...)</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">组件的引用兼容了vue及小程序  </span><br><span class="line">使用方式1：在src目录下创建&#x2F;component目录存放组件，以插件市场中的uni-goods-nav为例:  </span><br><span class="line">   1. 插件市场中下载组件包(https:&#x2F;&#x2F;ext.dcloud.net.cn&#x2F;plugin?id&#x3D;865)</span><br><span class="line">   2. 解压后将goods-nav目录放置在component目录下</span><br><span class="line">   3. 引入插件、注册、使用，与常规vue开发一模一样</span><br></pre></td></tr></table></figure>
-   <template>
-    <view>
-        <view class="goods-carts">
-            <uni-goods-nav :options="options" :button-group="buttonGroup" />
-        </view>
-    </view>
-</template>
-<script>
-    import uniGoodsNav from '@/components/uni-goods-nav/uni-goods-nav.vue'
-    export default {
-        components: { uniGoodsNav },
-        data() {
-            return {
-                options: [{
-                    icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/kefu.png',
-                    text: '客服'
-                }, {
-                    icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/dianpu.png',
-                    text: '店铺'
-                }, {
-                    icon: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/uni-ui/goodsnav/carts.png',
-                    text: '购物车',
-                    info: 2
-                }],
-                buttonGroup: [{
-                        text: '加入购物车',
-                        backgroundColor: '#ffa200 ',
-                        color: '#fff'
-                    },
-                    {
-                        text: '立即购买',
-                        backgroundColor: '#ff0000',
-                        color: '#fff'
-                    }
-                ]
-            }
-        }
-    }
-</script>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用方式2： 与方式1一样，但使用组件时与小程序一样在pages.json中引入组件</span><br></pre></td></tr></table></figure>
-{
-    "path": "subPages/demo/uni-goods-nav",
-    "style": {
-            "navigationBarTitleText": "购物车",
-            "usingComponents": {
-            "uni-goods-nav": "/components/uni-goods-nav/uni-goods-nav"
-    }
-}
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">得到的效果:  </span><br><span class="line">![购物车](&#x2F;images&#x2F;gwc.png)</span><br><span class="line">熟悉web开发的前端开发者都习惯从npm仓库中获取组件，所以很多时候觉得通过下载组件包然后解压的方式显得很怪异，实际上uni-app是支持npm方式引入组件的，只是这有很大风险会有部分平台不支持的问题。可以通过条件编译来屏蔽不支持的平台。以mpvue-echarts为例</span><br></pre></td></tr></table></figure>
-// npm安装包
-npm install echarts mpvue-echarts --save
-// echarts-weixin.vue
-<template>  
-    <div class="container">  
-        <mpvue-echarts :echarts="echarts" :onInit="onInit" />  
-    </div>  
-</template>  
-<script>  
-    import * as echarts from 'echarts'  
-    import mpvueEcharts from 'mpvue-echarts'  
-    export default { 
-        components: {  mpvueEcharts  },  
-        data() {  
-            return {  
-                echarts,  
-                onInit: function (canvas, width, height) {
-                ...
-                }
-            }  
-        }
-    }  
-</script>
-// echarts-h5.vue
-<script>
-import * as echarts from 'echarts'
-var myChart = echarts.init(document.getElementById('echarts'));
-myChart.setOption({
-    ...
-})
-</script>
-// pages.json
-#ifdef MP-WEIXIN
-{
-    "path": "pages/demo/echarts-weixin",
-    "style": {
-        "navigationBarTitleText": "demo-echarts"
-    }
-},
-#endif
-#ifdef H5
-{
-    "path": "pages/demo/echarts-h5",
-    "style": {
-        "navigationBarTitleText": "demo-echarts"
-    }
-},
-#endif
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 3. 微信小程序组件</span><br><span class="line">由于性能问题，开发中应尽量避免直接使用小程序的组件。但是uni-app仍然 支持在App 和 小程序 中使用小程序自定义组件。  </span><br><span class="line">   1. 在项目src目录下新建小程序组件放置目录，微信及QQ-wxcomponents&#x2F;支付宝-mycomponents&#x2F;百度-swancomponents&#x2F;头条-ttcomponents</span><br><span class="line">   2. 在 pages.json 对应页面的 style -&gt; usingComponents 引入组件</span><br><span class="line">   3. 页面中使用组件</span><br><span class="line"></span><br><span class="line">以有赞的vant-weapp button组件为例</span><br><span class="line">1. 下载组件并放置到wxcomponents目录下:  </span><br><span class="line">    &#96;npm i @vant&#x2F;weapp -S --production&#96; </span><br><span class="line">    复制node_modules&#x2F;@vant&#x2F;weapp&#x2F;dist&#x2F;button到wxcomponents&#x2F;vant&#x2F;下</span><br><span class="line">2. pages.json 中使用组件</span><br></pre></td></tr></table></figure>
-{
-  "usingComponents": {
-    "van-button": "/wxcomponents/vant/button/index"
-  },
-  "navigationBarTitleText": "test-vant"
-}
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3. demo-test-wx.vue</span><br></pre></td></tr></table></figure>
-<template>
-    <view>
-        <view class="uni-common-mt" style="text-align: center;">
-            <van-button type="primary" @click="onClick">vant按钮组件</van-button>
-        </view>
-    </view>
-</template>
-<script>
-    export default {
-        data() {
-            return {
-                checked: true
-            };
-        },
-        methods: {
-            onClick() {
-                uni.showToast({
-                    title: "uni-app支持在微信小程序、QQ小程序端、App端、H5端引入微信小程序自定义组件。",
-                    mask: false,
-                    icon: "none",
-                    duration: 3000
-                });
-            }
-        }
-    }
-</script>
-<style>
-</style>
-```
-效果：
-![结果](/images/test-vant.png)
+<h4 id="2-vue组件"><a href="#2-vue组件" class="headerlink" title="2. vue组件"></a>2. vue组件</h4><p>uni-app只支持vue单文件组件,所以在使用第三方组件如：npm引入某组件的时候应注意。有些原生vue支持的组件在uni-app中是错误的组件,例如： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; uni-app不支持的组件</span><br><span class="line">&#x2F;&#x2F;  1.动态组件</span><br><span class="line">&lt;component v-bind:is&#x3D;&quot;currentTabComponent&quot;&gt;&lt;&#x2F;component&gt;</span><br><span class="line">&#x2F;&#x2F;  2.异步组件</span><br><span class="line">Vue.component(&#39;async-example&#39;, function (resolve, reject) &#123;</span><br><span class="line">  setTimeout(function () &#123;</span><br><span class="line">    resolve(&#123;</span><br><span class="line">      template: &#39;&lt;div&gt;I am async!&lt;&#x2F;div&gt;&#39;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; 3.包含自定义render的组件</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    ...</span><br><span class="line">    export default &#123;</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123; &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        ...</span><br><span class="line">        render (createElement) &#123;</span><br><span class="line">            return createElement(...)</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>组件的引用兼容了vue及小程序<br>使用方式1：在src目录下创建/component目录存放组件，以插件市场中的uni-goods-nav为例:  </p>
+<ol>
+<li>插件市场中下载组件包(<a href="https://ext.dcloud.net.cn/plugin?id=865" target="_blank" rel="noopener">https://ext.dcloud.net.cn/plugin?id=865</a>)</li>
+<li>解压后将goods-nav目录放置在component目录下</li>
+<li>引入插件、注册、使用，与常规vue开发一模一样  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">   &lt;template&gt;</span><br><span class="line">    &lt;view&gt;</span><br><span class="line">        &lt;view class&#x3D;&quot;goods-carts&quot;&gt;</span><br><span class="line">            &lt;uni-goods-nav :options&#x3D;&quot;options&quot; :button-group&#x3D;&quot;buttonGroup&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import uniGoodsNav from &#39;@&#x2F;components&#x2F;uni-goods-nav&#x2F;uni-goods-nav.vue&#39;</span><br><span class="line">    export default &#123;</span><br><span class="line">        components: &#123; uniGoodsNav &#125;,</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                options: [&#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;kefu.png&#39;,</span><br><span class="line">                    text: &#39;客服&#39;</span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;dianpu.png&#39;,</span><br><span class="line">                    text: &#39;店铺&#39;</span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    icon: &#39;https:&#x2F;&#x2F;img-cdn-qiniu.dcloud.net.cn&#x2F;uniapp&#x2F;uni-ui&#x2F;goodsnav&#x2F;carts.png&#39;,</span><br><span class="line">                    text: &#39;购物车&#39;,</span><br><span class="line">                    info: 2</span><br><span class="line">                &#125;],</span><br><span class="line">                buttonGroup: [&#123;</span><br><span class="line">                        text: &#39;加入购物车&#39;,</span><br><span class="line">                        backgroundColor: &#39;#ffa200 &#39;,</span><br><span class="line">                        color: &#39;#fff&#39;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        text: &#39;立即购买&#39;,</span><br><span class="line">                        backgroundColor: &#39;#ff0000&#39;,</span><br><span class="line">                        color: &#39;#fff&#39;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 
+</li>
+</ol>
+<p>使用方式2： 与方式1一样，但使用组件时与小程序一样在pages.json中引入组件  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;path&quot;: &quot;subPages&#x2F;demo&#x2F;uni-goods-nav&quot;,</span><br><span class="line">    &quot;style&quot;: &#123;</span><br><span class="line">            &quot;navigationBarTitleText&quot;: &quot;购物车&quot;,</span><br><span class="line">            &quot;usingComponents&quot;: &#123;</span><br><span class="line">            &quot;uni-goods-nav&quot;: &quot;&#x2F;components&#x2F;uni-goods-nav&#x2F;uni-goods-nav&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到的效果:<br><img src="/images/gwc.png" alt="购物车"><br>熟悉web开发的前端开发者都习惯从npm仓库中获取组件，所以很多时候觉得通过下载组件包然后解压的方式显得很怪异，实际上uni-app是支持npm方式引入组件的，只是这有很大风险会有部分平台不支持的问题。可以通过条件编译来屏蔽不支持的平台。以mpvue-echarts为例  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; npm安装包</span><br><span class="line">npm install echarts mpvue-echarts --save</span><br><span class="line">&#x2F;&#x2F; echarts-weixin.vue</span><br><span class="line">&lt;template&gt;  </span><br><span class="line">    &lt;div class&#x3D;&quot;container&quot;&gt;  </span><br><span class="line">        &lt;mpvue-echarts :echarts&#x3D;&quot;echarts&quot; :onInit&#x3D;&quot;onInit&quot; &#x2F;&gt;  </span><br><span class="line">    &lt;&#x2F;div&gt;  </span><br><span class="line">&lt;&#x2F;template&gt;  </span><br><span class="line">&lt;script&gt;  </span><br><span class="line">    import * as echarts from &#39;echarts&#39;  </span><br><span class="line">    import mpvueEcharts from &#39;mpvue-echarts&#39;  </span><br><span class="line">    export default &#123; </span><br><span class="line">        components: &#123;  mpvueEcharts  &#125;,  </span><br><span class="line">        data() &#123;  </span><br><span class="line">            return &#123;  </span><br><span class="line">                echarts,  </span><br><span class="line">                onInit: function (canvas, width, height) &#123;</span><br><span class="line">                ...</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&#x2F;&#x2F; echarts-h5.vue</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import * as echarts from &#39;echarts&#39;</span><br><span class="line">var myChart &#x3D; echarts.init(document.getElementById(&#39;echarts&#39;));</span><br><span class="line">myChart.setOption(&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&#x2F;&#x2F; pages.json</span><br><span class="line">#ifdef MP-WEIXIN</span><br><span class="line">&#123;</span><br><span class="line">    &quot;path&quot;: &quot;pages&#x2F;demo&#x2F;echarts-weixin&quot;,</span><br><span class="line">    &quot;style&quot;: &#123;</span><br><span class="line">        &quot;navigationBarTitleText&quot;: &quot;demo-echarts&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">#endif</span><br><span class="line">#ifdef H5</span><br><span class="line">&#123;</span><br><span class="line">    &quot;path&quot;: &quot;pages&#x2F;demo&#x2F;echarts-h5&quot;,</span><br><span class="line">    &quot;style&quot;: &#123;</span><br><span class="line">        &quot;navigationBarTitleText&quot;: &quot;demo-echarts&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-微信小程序组件"><a href="#3-微信小程序组件" class="headerlink" title="3. 微信小程序组件"></a>3. 微信小程序组件</h4><p>由于性能问题，开发中应尽量避免直接使用小程序的组件。但是uni-app仍然 支持在App 和 小程序 中使用小程序自定义组件。  </p>
+<ol>
+<li>在项目src目录下新建小程序组件放置目录，微信及QQ-wxcomponents/支付宝-mycomponents/百度-swancomponents/头条-ttcomponents</li>
+<li>在 pages.json 对应页面的 style -&gt; usingComponents 引入组件</li>
+<li>页面中使用组件</li>
+</ol>
+<p>以有赞的vant-weapp button组件为例</p>
+<ol>
+<li><p>下载组件并放置到wxcomponents目录下:<br> <code>npm i @vant/weapp -S --production</code><br> 复制node_modules/@vant/weapp/dist/button到wxcomponents/vant/下</p>
+</li>
+<li><p>pages.json 中使用组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;usingComponents&quot;: &#123;</span><br><span class="line">    &quot;van-button&quot;: &quot;&#x2F;wxcomponents&#x2F;vant&#x2F;button&#x2F;index&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;navigationBarTitleText&quot;: &quot;test-vant&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>demo-test-wx.vue  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;view&gt;</span><br><span class="line">        &lt;view class&#x3D;&quot;uni-common-mt&quot; style&#x3D;&quot;text-align: center;&quot;&gt;</span><br><span class="line">            &lt;van-button type&#x3D;&quot;primary&quot; @click&#x3D;&quot;onClick&quot;&gt;vant按钮组件&lt;&#x2F;van-button&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                checked: true</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            onClick() &#123;</span><br><span class="line">                uni.showToast(&#123;</span><br><span class="line">                    title: &quot;uni-app支持在微信小程序、QQ小程序端、App端、H5端引入微信小程序自定义组件。&quot;,</span><br><span class="line">                    mask: false,</span><br><span class="line">                    icon: &quot;none&quot;,</span><br><span class="line">                    duration: 3000</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>效果：<br><img src="/images/test-vant.png" alt="结果"></p>
 
         
         <br />
