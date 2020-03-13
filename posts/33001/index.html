@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+    <title>
+        
+        vuex基础
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.gif" />
+        </div>
+        <div class="name">
+            <i>hsz199086@163.com</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vuex基础"><span class="toc-text">vuex基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-基础使用"><span class="toc-text">1.基础使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-vuex原理"><span class="toc-text">2.vuex原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-vuex插件"><span class="toc-text">2.vuex插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-模块及命名空间"><span class="toc-text">4.模块及命名空间</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        vuex基础
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-10 22:27:08</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="vuex基础"><a href="#vuex基础" class="headerlink" title="vuex基础"></a>vuex基础</h2><h4 id="1-基础使用"><a href="#1-基础使用" class="headerlink" title="1.基础使用"></a>1.基础使用</h4><ol>
+<li>在项目的根目录下新增store文件夹，文件夹下创建index.js  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import Vuex from &#39;vuex&#39;</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line">const store &#x3D; new Vuex(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        name: &#39;helloVueX&#39;,</span><br><span class="line">        count: 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">export default store</span><br></pre></td></tr></table></figure></li>
+<li>将store挂载到当前项目的Vue实例当中  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">import store from &#39;.&#x2F;store&#39;</span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line">&#x2F;* eslint-disable no-new *&#x2F;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router,</span><br><span class="line">  store,  </span><br><span class="line">  render: h &#x3D;&gt; h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>获取store中的状态  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id&#x3D;&#39;app&#39;&gt;</span><br><span class="line">        name:</span><br><span class="line">        &lt;!--方式1: 模板中直接获取 --&gt;</span><br><span class="line">        &lt;h1&gt;&#123;&#123; $store.state.name &#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; mapState &#125; from &#39;vuex&#39;</span><br><span class="line">export default &#123;</span><br><span class="line">	computed: &#123;</span><br><span class="line">    	 &#x2F;&#x2F; 方式2: 计算属性映射</span><br><span class="line">         count () &#123;</span><br><span class="line">	      return store.state.count</span><br><span class="line">	     &#125;,</span><br><span class="line">    	&#x2F;&#x2F; 方式4: mapState 辅助函数加入计算属性</span><br><span class="line">         ...mapState(&#123;</span><br><span class="line">    		name: state &#x3D;&gt; state.name</span><br><span class="line">         &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">	methods: &#123;</span><br><span class="line">    	test () &#123;</span><br><span class="line">            &#x2F;&#x2F; 方式3: 方法中直接获取</span><br><span class="line">        	console.log(this.$store.state.name)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>修改state状态<br>为了方便调试及维护，不建议在组件中直接对state中的成员进行操作。一般使用mutations对state的数据修改、增加、删除等。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; src&#x2F;store&#x2F;index.js 增加mutations</span><br><span class="line">...</span><br><span class="line">const store &#x3D; new Vuex(&#123;</span><br><span class="line">    state:&#123; ... &#125;,</span><br><span class="line">    mutations:&#123;</span><br><span class="line">        editName(state, payload)&#123;</span><br><span class="line">            state.name &#x3D; payload</span><br><span class="line">        &#125;,</span><br><span class="line">        editPerson(state, payload)&#123;</span><br><span class="line">            let &#123; age, sex, name &#125; &#x3D; payload</span><br><span class="line">            state &#x3D; &#123; ...state, age, sex, name &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">export default store</span><br><span class="line">&#x2F;&#x2F; 组件中使用mutations</span><br><span class="line">this.$store.commit(&#39;editName&#39;, &#39;hello&#39;)</span><br><span class="line">&#x2F;&#x2F; 或者</span><br><span class="line">this.$store.commit(&#39;editPerson&#39;, &#123; name: &#39;hello&#39;, age: &#39;12&#39;, sex: &#39;m&#39; &#125;)</span><br></pre></td></tr></table></figure>
+由于vuex不建议直接修改state，在处理表单时v-model等操作要特殊处理，如: <code>&lt;input v-model=&quot;state.xxx&quot;&gt;</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 使用带有 setter 的双向绑定计算属性</span><br><span class="line">computed: &#123;</span><br><span class="line">  xxx: &#123;</span><br><span class="line">    set (value) &#123;</span><br><span class="line">      this.$store.commit(&#39;updateXXX&#39;, value)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="2-vuex原理"><a href="#2-vuex原理" class="headerlink" title="2.vuex原理"></a>2.vuex原理</h4><ol>
+<li>vuex核心API<br>state: 存储在 Vuex 中的数据和 Vue 实例中的 data 遵循相同的规则,对象必须是纯粹的对象 。<br>mutations: 更改store中状态的唯一方法是提交 mutation。<br>getters: 加工state成员给外界，返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。通过方法访问时，每次都会去进行调用，而不会缓存结果。  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; src&#x2F;store&#x2F;index.js 增加getters</span><br><span class="line">...</span><br><span class="line">getters: &#123;</span><br><span class="line">  getTodoById: (state) &#x3D;&gt; (id) &#x3D;&gt; &#123;</span><br><span class="line">    return state.todos.find(todo &#x3D;&gt; todo.id &#x3D;&#x3D;&#x3D; id)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 以属性的形式访问</span><br><span class="line">store.getters.getTodoById</span><br><span class="line">&#x2F;&#x2F; 通过方法访问不会缓存结果</span><br><span class="line">store.getters.getTodoById(2)</span><br></pre></td></tr></table></figure>
+actions: Action类似于mutation，但Action提交的是 mutation,可包含异步操作  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; src&#x2F;store&#x2F;index.js 增加actions</span><br><span class="line">...</span><br><span class="line">actions: &#123;</span><br><span class="line">    increment (context) &#123;</span><br><span class="line">       setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">      		context.commit(&#39;increment&#39;)</span><br><span class="line">    	&#125;, 1000)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 以属性的形式访问</span><br><span class="line">store.dispatch(&#39;increment&#39;)</span><br></pre></td></tr></table></figure>
+modules: Vuex 允许将store分割成模块  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; src&#x2F;store&#x2F;index.js 增加modules</span><br><span class="line">const moduleA &#x3D; &#123;</span><br><span class="line">  state: &#123; ... &#125;,</span><br><span class="line">  mutations: &#123; ... &#125;,</span><br><span class="line">  actions: &#123; ... &#125;,</span><br><span class="line">  getters: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line">const moduleB &#x3D; &#123;</span><br><span class="line">  state: &#123; ... &#125;,</span><br><span class="line">  mutations: &#123; ... &#125;,</span><br><span class="line">  actions: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line">const store &#x3D; new Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    a: moduleA,</span><br><span class="line">    b: moduleB</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; 获取modules的状态</span><br><span class="line">store.state.a</span><br><span class="line">store.state.b</span><br></pre></td></tr></table></figure></li>
+<li>运行原理<br><img src="../images/16550832-20d0ad3c60a99111.webp" alt="Vuex运行原理"></li>
+</ol>
+<h4 id="2-vuex插件"><a href="#2-vuex插件" class="headerlink" title="2.vuex插件"></a>2.vuex插件</h4><p>Vuex 插件就是一个函数，它接收 store 作为唯一参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 一般以工厂函数创建插件</span><br><span class="line">export default function createMyPlugin (config) &#123;</span><br><span class="line">	return (store) &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; store 初始化后调用</span><br><span class="line">        store.subscribe((mutation, state) &#x3D;&gt; &#123;</span><br><span class="line">            &#x2F;&#x2F; 每次提交mutation之后调用</span><br><span class="line">            let &#123; type, payload &#125; &#x3D;mutation</span><br><span class="line">            console.log(type, payload)</span><br><span class="line">        &#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; src&#x2F;store&#x2F;index.js 增加plugins</span><br><span class="line">const store &#x3D; new Vuex.Store(&#123;</span><br><span class="line">  plugins: [createMyPlugin(&#123;env: &#39;dev&#39;&#125;)]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>常用的vuex插件</p>
+<ol>
+<li><a href="https://github.com/robinvdvleuten/vuex-persistedstate" target="_blank" rel="noopener">vuex-persistedstate</a> 刷新页面或关闭标签页时仍然保持state数据。</li>
+<li><a href="https://github.com/xanf/vuex-shared-mutations" target="_blank" rel="noopener">vuex-shared-mutations</a> 在不同的标签页之间同步state数据。</li>
+</ol>
+<h4 id="4-模块及命名空间"><a href="#4-模块及命名空间" class="headerlink" title="4.模块及命名空间"></a>4.模块及命名空间</h4><p>vuex使用单一状态树管理整个应用的状态，当应用变得非常复杂时，store 对象就有可能变得臃肿。为了解决这些问题，vuex提供模块化方式分割store。可以新建N个子文件夹，将上述提到的例子(src/store/index.js 增加modules)中每个模块都分离出来，无需赘述，但需注意几点：</p>
+<ul>
+<li>对于模块内部的 mutation 和 getter，接收到的参数state是本模块的state，action中context.state也是(本模块)局部状态。全局state通过第三个参数或者context.rootState获取。</li>
+<li>store 创建之后可以动态注册子模块<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 注册模块 &#96;myModule&#96;</span><br><span class="line">store.registerModule(&#39;myModule&#39;, &#123;</span><br><span class="line">  &#x2F;&#x2F; ...</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; 注册嵌套模块 &#96;nested&#x2F;myModule&#96;</span><br><span class="line">store.registerModule([&#39;nested&#39;, &#39;myModule&#39;], &#123;</span><br><span class="line">  &#x2F;&#x2F; ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>commit或dispatch到全局添加第三个参数{ root: true },<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> actions: &#123;</span><br><span class="line">   &#x2F;&#x2F; 在这个模块中， dispatch 和 commit 也被局部化了</span><br><span class="line">   &#x2F;&#x2F; 他们可以接受 &#96;root&#96; 属性以访问根 dispatch 或 commit</span><br><span class="line">   someAction (&#123; dispatch, commit, getters, rootGetters &#125;) &#123;</span><br><span class="line">     getters.someGetter &#x2F;&#x2F; -&gt; &#39;foo&#x2F;someGetter&#39;</span><br><span class="line">     rootGetters.someGetter &#x2F;&#x2F; -&gt; &#39;someGetter&#39;</span><br><span class="line">     dispatch(&#39;someOtherAction&#39;) &#x2F;&#x2F; -&gt; &#39;foo&#x2F;someOtherAction&#39;</span><br><span class="line">     dispatch(&#39;someOtherAction&#39;, null, &#123; root: true &#125;) &#x2F;&#x2F; -&gt; &#39;someOtherAction&#39;</span><br><span class="line">     commit(&#39;someMutation&#39;) &#x2F;&#x2F; -&gt; &#39;foo&#x2F;someMutation&#39;</span><br><span class="line">     commit(&#39;someMutation&#39;, null, &#123; root: true &#125;) &#x2F;&#x2F; -&gt; &#39;someMutation&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>vuex默认没有开启命名空间，但开发时建议开启<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const moduleA &#x3D; &#123;</span><br><span class="line">   namespaced: true,&#x2F;&#x2F; 开启命名空间</span><br><span class="line">   state: &#123; ... &#125;,</span><br><span class="line">   mutations: &#123; ... &#125;,</span><br><span class="line">   actions: &#123; ... &#125;,</span><br><span class="line">   getters: &#123; ... &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+开启命名空间后:<ul>
+<li>避免commit或者dispatch时多个子module下同名mutation或者action同时响应(A和B都有mutationxxx，commit(‘xxx’),A和B都有数据变化)难以维护。</li>
+<li>辅助函数需要指定命名空间字符串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">方式1: 第一个参数指定</span><br><span class="line">mapActions(&#39;xxx&#x2F;moduleA&#39;, [&#39;helloXXX&#39;, &#39;workXXX&#39;]) </span><br><span class="line">mapXXXs(&#39;xxx&#x2F;moduleB&#39;,[...])</span><br><span class="line">方式2: 使用createNamespacedHelpers指定</span><br><span class="line">import &#123; createNamespacedHelpers &#125; from &quot;vuex&quot;;</span><br><span class="line">const &#123; mapState &#125; &#x3D; createNamespacedHelpers(&#39;命名空间名&#39;)</span><br><span class="line">export default &#123;</span><br><span class="line">	computed: &#123;</span><br><span class="line">		...mapState([&quot;permissionList&quot;])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
