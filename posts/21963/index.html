@@ -11,7 +11,7 @@
 
     <title>
         
-        uni-app实践与问题
+        uni-app实践-微信小程序转uniapp
         
     </title>
 
@@ -93,7 +93,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#writing………"><span class="toc-text">writing……….</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#uni-app实践与问题"><span class="toc-text">uni-app实践与问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-uni-app实现文档阅读reader"><span class="toc-text">1.uni-app实现文档阅读reader</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#uni-app实践-微信小程序转uniapp"><span class="toc-text">uni-app实践-微信小程序转uniapp</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-实现目标与效果"><span class="toc-text">1.实现目标与效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-转换步骤"><span class="toc-text">2.转换步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-注意事项"><span class="toc-text">3.注意事项</span></a></li></ol></li></ol></li></ol>
 </div>
     
 </div>
@@ -124,7 +124,7 @@
 
 <div class="post-container">
     <div class="post-title">
-        uni-app实践与问题
+        uni-app实践-微信小程序转uniapp
     </div>
 
     <div class="post-meta">
@@ -136,7 +136,37 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        <h2 id="writing………"><a href="#writing………" class="headerlink" title="writing………."></a>writing……….</h2><h2 id="uni-app实践与问题"><a href="#uni-app实践与问题" class="headerlink" title="uni-app实践与问题"></a>uni-app实践与问题</h2><h4 id="1-uni-app实现文档阅读reader"><a href="#1-uni-app实现文档阅读reader" class="headerlink" title="1.uni-app实现文档阅读reader"></a>1.uni-app实现文档阅读reader</h4>
+        <h2 id="uni-app实践-微信小程序转uniapp"><a href="#uni-app实践-微信小程序转uniapp" class="headerlink" title="uni-app实践-微信小程序转uniapp"></a>uni-app实践-微信小程序转uniapp</h2><h4 id="1-实现目标与效果"><a href="#1-实现目标与效果" class="headerlink" title="1.实现目标与效果"></a>1.实现目标与效果</h4><p>在之前uniapp的学习过程中了解到uniapp的强大跨端兼容能力，那么能不能将之前的微信小程序或其他项目平滑的迁移到uniapp平台，从而是老项目具备跨端能力呢。本文记录一次微信小程序迁移到uniapp的过程。<br>H5效果:<br><img src="../images/2020-03-20-15-37-42.png" alt="H5运行效果">  </p>
+<p>微信小程序效果:<br><img src="../images/2020-03-20-19-49-32.png" alt="微信小程序效果">  </p>
+<p>支付宝小程序效果:<br><img src="../images/2020-03-21-11-42-27.png" alt="支付宝小程序效果"></p>
+<p>PS:在我手动改了小部分代码后发现一个非常好用的自动转换工具<a href="https://github.com/zhangdaren/miniprogram-to-uniapp" target="_blank" rel="noopener">miniprogram-to-uniapp</a>，对于普通wxml转uniapp非常好用在此推荐。</p>
+<h4 id="2-转换步骤"><a href="#2-转换步骤" class="headerlink" title="2.转换步骤"></a>2.转换步骤</h4><p>开发过小程序及vue项目的开发者基本会有一个感受，小程序与vue开发在很多时候都有相似，而uniapp完全兼容vue,同时开发规范靠近小程序开发。所以相对其他项目而言小程序老项目迁移到uniapp阻碍很小。</p>
+<ol>
+<li>新建一个uniapp项目，修改app.vue,将app.js代码放入script, app.wxss放入style下，根据平台添加编译条件。<br><img src="../images/2020-03-20-17-30-34.png" alt="app.vue"></li>
+<li>将app.json转换到pages.json，这里比较繁琐的是需要将每个页面下的json配置合并到pages.json。以首页为例，如下图index.json是pages下的配置文件：<br><img src="../images/2020-03-20-22-31-42.png" alt="合并文件对比"></li>
+<li>在main.js中全局mixin一个setData方法(参考miniprogram-to-uniapp)。setData 是小程序开发中使用最频繁的接口,但uniapp中视图层和逻辑层的数据传输都是直接赋值。为了每个页面最少的代码修改，这里相当于做了一个hack。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">   &#x2F;&#x2F; main.js</span><br><span class="line">import Vue from &#39;vue&#39;;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;;</span><br><span class="line">Vue.config.productionTip &#x3D; false;</span><br><span class="line">Vue.mixin(&#123;</span><br><span class="line">	methods: &#123;</span><br><span class="line">		setData: function(obj, callback) &#123;</span><br><span class="line">			let that &#x3D; this;</span><br><span class="line">			let keys &#x3D; [];</span><br><span class="line">			let val, data;</span><br><span class="line">			Object.keys(obj).forEach(function(key) &#123;</span><br><span class="line">				keys &#x3D; key.split(&#39;.&#39;);</span><br><span class="line">				val &#x3D; obj[key];</span><br><span class="line">				data &#x3D; that.$data;</span><br><span class="line">				keys.forEach(function(key2, index) &#123;</span><br><span class="line">					if (index + 1 &#x3D;&#x3D; keys.length) &#123;</span><br><span class="line">						that.$set(data, key2, val);</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						if (!data[key2]) &#123;</span><br><span class="line">							that.$set(data, key2, &#123;&#125;);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					data &#x3D; data[key2];</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;);</span><br><span class="line">			callback &amp;&amp; callback();</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line">App.mpType &#x3D; &#39;app&#39;;</span><br><span class="line">const app &#x3D; new Vue(&#123;</span><br><span class="line">    ...App</span><br><span class="line">&#125;);</span><br><span class="line">app.$mount();</span><br></pre></td></tr></table></figure></li>
+<li>每个页面下新建一个vue文件，将wxss的内容放入style，wxml的内容放入template&gt;view下，js中的Page传参稍作修改放入script。</li>
+<li>对于步骤4中的script进行修改，主要包括: 将data改造为函数返回、将页面生命周期onXXX之外的其他方法放到methods下。</li>
+<li>对于步骤4中的template进行修改,主要包括:<ul>
+<li>attr=”“，改为 :attr=”a”</li>
+<li>title=”xxx“ 改为 :title=”‘xxx’ + item”</li>
+<li>bind:xxx=”methodXXX” 改@click=”methodXXX”</li>
+<li>catch:tap=”xx” 改为 @tap.native.stop=”xx”</li>
+<li>对于mut-bind互斥事件，通过额外的flag进行条件处理</li>
+<li>wx:if 改为 v-if、wx:for 改为v-for</li>
+</ul>
+</li>
+<li>对于pages.json中usingComponents引用的自定义组件可以自己按照步骤4到6类似的方式转换为.vue文件，也可以放入src/wxcomponents下，uniapp会自动在每个组件目录下生成.vue文件,注意需要将usingComponents的引用路径改下。</li>
+<li>将所有静态文件放到static目录下，保持目录结构，然后在vue.config.js统一处理alias，避免在代码中修改引用路径。</li>
+<li>以上这些步骤做完后就是进行跨端改造，一些平台独享的api或组件要特殊处理。</li>
+</ol>
+<p>总体来说，老项目迁移到uniapp先看需要兼容的平台，将对应不兼容的API通过条件编译的方式屏蔽调，对于必须要的功能或者阻碍流程的代码使用新增hack的方式特殊平台特殊处理，尽可能少修改或不修改原来的代码。</p>
+<h4 id="3-注意事项"><a href="#3-注意事项" class="headerlink" title="3.注意事项"></a>3.注意事项</h4><ol>
+<li>以上步骤如果每一个页面都执行一遍的话非常繁琐，其实很多步骤都是可以批量完成的，建议先用相关工具批量执行后再细致调整。相较于单纯的正则匹配替换，miniprogram-to-uniapp是通过babel进行词法分析，然后进行的修改，更加可靠，推荐使用。</li>
+<li>当然工具不是万能的，比如miniprogram-to-uniapp无法将app.json和index.json合并后加入pages.json，无法区分代码平台添加条件编译，无法智能调整静态资源路径等等</li>
+<li>一套代码多处运行非常考验代码的健壮性，一不小心可能会导致一行代码多处运行不畅，所以在uniapp中条件编译非常重要，测试时可根据目标平台边测试边修改，修改的代码比较复杂不能完全保证跨端运行时应添加编译条件以确保其他平台不被影响</li>
+</ol>
+
         
         <br />
         <div id="comment-container">
