@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+    <title>
+        
+        nodejs流梳理
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.gif" />
+        </div>
+        <div class="name">
+            <i>hsz199086@163.com</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nodejs流梳理"><span class="toc-text">nodejs流梳理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是流"><span class="toc-text">1.什么是流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-流的类型"><span class="toc-text">2.流的类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-内部缓冲区大小-highWaterMark"><span class="toc-text">2.内部缓冲区大小(highWaterMark)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-可读流-stream-Readable"><span class="toc-text">3.可读流(stream.Readable)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-可写流-stream-Writable"><span class="toc-text">4.可写流(stream.Writable)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-双向流-stream-Duplex"><span class="toc-text">5.双向流(stream.Duplex)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-转换流-stream-Transform"><span class="toc-text">6.转换流(stream.Transform)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-npm资源"><span class="toc-text">7.npm资源</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        nodejs流梳理
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-28 19:40:30</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="nodejs流梳理"><a href="#nodejs流梳理" class="headerlink" title="nodejs流梳理"></a>nodejs流梳理</h2><p>前段时间实现一个nodejs 的反向代理时遇到一个问题，需要将一个远程获取的图片返回给浏览器端，并同时缓存到本地。由于不了解nodejs流，使用了fs.readFile导致文件比较大请求频繁时内存占用严重。<br>对于前端开发人员来说nodejs中stream API夹杂了许多新名词或新概念阻碍我们对它的理解，本文梳理了一下nodejs流中的一些概念。   </p>
+<h4 id="1-什么是流"><a href="#1-什么是流" class="headerlink" title="1.什么是流"></a>1.什么是流</h4><p>官方定义流是 Node.js 中处理流式数据的抽象接口。<br>那么什么是流式数据？数组或者字符串等普通类型的数据是一个内存中所存的数据，获取这个内存中的数据就是完整的数据集合，但是流式数据可能不是完整的存在内存中，它不需要一次装载所有数据，只需要一小片内存，不断的循环利用这片内存装载指定的那个数据集合。正因为这样，使得流可以处理超大容量的数据。  </p>
+<p>在 Node.js很多内置模块都实现了流接口，而stream 模块主要用于创建新类型的流实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const &#123; Readable &#125; &#x3D; require(&#39;stream&#39;);</span><br><span class="line">class MyReadable extends Readable &#123;</span><br><span class="line">    constructor(options) &#123;</span><br><span class="line">        &#x2F;&#x2F; 调用 stream.Readable(options) 构造函数。</span><br><span class="line">        super(options);</span><br><span class="line">        &#x2F;&#x2F; ...</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 自定义可读流必须实现readable._read() 方法</span><br><span class="line">    _read() &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-流的类型"><a href="#2-流的类型" class="headerlink" title="2.流的类型"></a>2.流的类型</h4><p>nodejs的流基本分为四种:</p>
+<ul>
+<li>可读流(Readable)是数据可以被消费的源的抽象，例如fs.createReadStream  </li>
+<li>可写流(Writable)是数据可以被写入目标的抽象，例如 fs.createWriteStream  </li>
+<li>双向流(Duplex)是可读也可写的流，例如 TCP socket。</li>
+<li>转换流(Transform)是基于双向流的，可以在读或者写的时候被用来更改或者转换数据。例如 zlib.createGzip使用gzip 算法压缩数据。</li>
+</ul>
+<p>此外，nodejs中流分为两种模式:</p>
+<ul>
+<li>二进制模式, 每个分块都是buffer或者string对象</li>
+<li>对象模式, 流内部处理的是一系列普通对象.(writable.write(chunk[,encoding][, callback])中的chunk不再是字符串、 Buffer 或 Uint8Array；readable.read([size])的返回值不再是Buffer而是普通javascript对象)</li>
+</ul>
+<p>当创建流时，可以使用 objectMode 选项把流实例切换到对象模式。 将已存在的流切换到对象模式是不安全的。</p>
+<h4 id="2-内部缓冲区大小-highWaterMark"><a href="#2-内部缓冲区大小-highWaterMark" class="headerlink" title="2.内部缓冲区大小(highWaterMark)"></a>2.内部缓冲区大小(highWaterMark)</h4><p>可写流和可读流都会在内部的缓冲器中存储数据(writable.writableBuffer/ readable.readableBuffer)。可缓冲的数据大小取决于传入流构造函数的 highWaterMark 选项。 二进制流模式highWaterMark 指定了字节的总数，对象模式highWaterMark指定了对象的总数。</p>
+<p>可读流对象在实现readable._read()接口时需调用stream.push(chunk)，将数据缓冲在可读流中。 如果流的消费者没有调用 stream.read()，则数据会保留在内部队列中直到被消费。<br><img src="/images/node-stream-event-readable.png" alt="可读流原理图"><br>一旦内部的可读缓冲的总大小达到 highWaterMark 指定的阈值时，流会暂时停止从底层资源读取数据，直到当前缓冲的数据被消费 (也就是说，流会停止调用readable._read())。  </p>
+<p>当调用 writable.write(chunk) 时，数据会被缓冲在可写流中。 当内部的可写缓冲的总大小小于 highWaterMark 设置的阈值时，调用 writable.write() 会返回 true。 一旦内部缓冲的大小达到或超过 highWaterMark 时，则会返回 false。</p>
+<h4 id="3-可读流-stream-Readable"><a href="#3-可读流-stream-Readable" class="headerlink" title="3.可读流(stream.Readable)"></a>3.可读流(stream.Readable)</h4><p>可读流运作于两种模式之一：流动模式（flowing）或暂停模式（paused）。 这些模式与对象模式分开(无论处于流动模式或暂停模式，都可以处于对象模式)。</p>
+<p>流动模式下监听data事件进行chunk块处理，无需调用read<br>暂停模式下需要循环调用read方法，直到读取完成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 流动模式</span><br><span class="line">fs.createReadableStream(&#39;.&#x2F;dome.txt&#39;)</span><br><span class="line">     .on(&#39;data&#39;, function(chunk) &#123;</span><br><span class="line">       console.log(chunk.toString());</span><br><span class="line">     &#125;)</span><br><span class="line">&#x2F;&#x2F; 暂停模式</span><br><span class="line">let rds &#x3D; fs.createReadableStream(&#39;.&#x2F;dome.txt&#39;)</span><br><span class="line">   rds.on(&#39;readable&#39;, function() &#123;</span><br><span class="line">        var chunk;</span><br><span class="line">        while((chunk &#x3D; rds.read()) !&#x3D;&#x3D; null) &#123;</span><br><span class="line">            console.log(chunk.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>所有可读流都默认是暂停模式，以下几种情况下转换为流动模式。</p>
+<ul>
+<li>添加了data事件监听</li>
+<li>调用stream.resume()</li>
+<li>调用stream.pipe()</li>
+</ul>
+<p>可读流切换回暂停模式会有一些注意点：</p>
+<ul>
+<li>添加’readable’事件句柄会使流自动停止流动</li>
+<li>如果没有管道目标，调用 stream.pause()</li>
+<li>移除 ‘data’ 事件句柄不会自动地暂停流</li>
+<li>如果有管道目标，一旦目标变为 drain 状态并请求接收数据时，则调用 stream.pause() 也不能保证流会保持暂停模式。</li>
+</ul>
+<p>drain状态:这里涉及一个概念, 背压(back-pressure), 就是当生产者速度大于消费者的时候, 输出流(可写流)的水位会不断上升, 当到达highWaterMark, 就会写入失败, 这时候也就是产生了背压, 停止写入数据，当可以继续写入数据时(即drain状态)会触发drain事件, 监听这个事件,可以继续向流写入数据.</p>
+<p>只有提供了消费或忽略数据的机制后，可读流才会产生数据。 如果消费的机制被禁用或移除，则可读流会停止产生数据。<br>如果可读流切换到流动模式，且没有可用的消费者来处理数据，则数据将会丢失。 例如，当调用 readable.resume() 时没有监听 ‘data’ 事件。</p>
+<h4 id="4-可写流-stream-Writable"><a href="#4-可写流-stream-Writable" class="headerlink" title="4.可写流(stream.Writable)"></a>4.可写流(stream.Writable)</h4><p>可写流的具体实例可能略有差别，但所有的可写流都遵循同一基本的使用模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const myStream &#x3D; getWritableStreamSomehow();</span><br><span class="line">myStream.write(&#39;一些数据&#39;);</span><br><span class="line">myStream.write(&#39;更多数据&#39;);</span><br><span class="line">myStream.end(&#39;完成写入数据&#39;);</span><br></pre></td></tr></table></figure>
+<p>在可写流上有两个事件比较有趣，pipe(添加管道事件)和unpipe(移除管道事件)，一般的我们在哪个对象上调用方法就会触发那个对象上的事件相应的也是在那个对象上监听事件，但这里在可读流上调用 stream.pipe() 方法时会触发目标流(可写流) 的’pipe’ 事件（unpipe同理）。另外调用pipe/unpipe方法返回可读流本身可继续链式调用pipe/unpipe方法。</p>
+<h4 id="5-双向流-stream-Duplex"><a href="#5-双向流-stream-Duplex" class="headerlink" title="5.双向流(stream.Duplex)"></a>5.双向流(stream.Duplex)</h4><p>双向流就是把输入流和输出流的接口都实现了.<br>此时option参数是同时传给了内部的Readable和Writeable, 如果要使用不同的选项, 就要分开配置,例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">this._writableState.objectMode</span><br><span class="line">this._readableState.objectMode</span><br></pre></td></tr></table></figure>
+<p>双向流多了一个选项allowHalfOpen, 意思是当其中一个流关闭的时候, 另外一条流是否也同时关闭, 默认是true, 也就是不同时关闭.</p>
+<h4 id="6-转换流-stream-Transform"><a href="#6-转换流-stream-Transform" class="headerlink" title="6.转换流(stream.Transform)"></a>6.转换流(stream.Transform)</h4><p>转换流实现了_transform() 和 _flush()接口.<br>转换流一般在transform的过程中把读写都做了, 也就是在处理输入的时候, 直接就输出了. 最后在输入结束的时候_flush() 会被调用, 就可以把剩余的内部数据一并输出了.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 解决的问题是在流中操作替换操作,其中替换的部分可以仔细看一下, stream和buffer一个很大的区别就是stream会被切割,导致要替换的数据也有可能被切割, 这个例子就提供了一种解决方法, 这个在后续实践中肯定也会遇到的.</span><br><span class="line">import &#123; Transform &#125; from &#39;stream&#39;;</span><br><span class="line">class ReplaceStream extends Transform &#123;</span><br><span class="line">	construct (option) &#123;</span><br><span class="line">    	super( &#123; ...option, decodeStrings: false &#125;)</span><br><span class="line">    	let &#123; searchString,  replaceString &#125; &#x3D; option</span><br><span class="line">        this.searchString &#x3D; searchString || &#39;&#39;</span><br><span class="line">        this.replaceString &#x3D; replaceString || &#39;&#39;</span><br><span class="line">        this.tailPiece &#x3D; &#39;&#39;</span><br><span class="line">    &#125;</span><br><span class="line">    _transform (chunk, encoding, callback) &#123;</span><br><span class="line">        var pieces &#x3D; (this.tailPiece + chunk).split(this.searchString);</span><br><span class="line">        var lastPiece &#x3D; pieces[pieces.length - 1];</span><br><span class="line">        var tailPieceLen &#x3D; this.searchString.length - 1;</span><br><span class="line">        this.tailPiece &#x3D; lastPiece.slice(-tailPieceLen);</span><br><span class="line">        pieces[pieces.length - 1] &#x3D; lastPiece.slice(0, -tailPieceLen);</span><br><span class="line">        this.push(pieces.join(this.replaceString)); </span><br><span class="line">        callback();</span><br><span class="line">    &#125;</span><br><span class="line">    _flush (callback) &#123;</span><br><span class="line">        this.push(this.tailPiece);</span><br><span class="line">        callback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default ReplaceStream</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-npm资源"><a href="#7-npm资源" class="headerlink" title="7.npm资源"></a>7.npm资源</h4><p>虽然nodejs中关于流的API比较多比较复杂，但能够帮助我们很好的理解流。实际开发中一些优秀的npm包能够帮我们快速使用nodejs流。<br><a href="https://www.npmjs.com/package/through2" target="_blank" rel="noopener">through2</a> 快速创建转化流<br><a href="https://www.npmjs.com/package/from2" target="_blank" rel="noopener">from2</a> 快速创建输入流<br><a href="https://www.npmjs.com/package/writable2" target="_blank" rel="noopener">writable2</a> 快速创建输出流</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
