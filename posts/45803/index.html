@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+
+    <title>
+        
+        vue-router进阶文档学习笔记
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.gif" />
+        </div>
+        <div class="name">
+            <i>hsz199086@163.com</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-router进阶文档学习笔记"><span class="toc-text">vue-router进阶文档学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-概述及原理"><span class="toc-text">1.概述及原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-导航守卫"><span class="toc-text">2.导航守卫</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-滚动行为"><span class="toc-text">3.滚动行为</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        vue-router进阶文档学习笔记
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-21 21:14:05</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="vue-router进阶文档学习笔记"><a href="#vue-router进阶文档学习笔记" class="headerlink" title="vue-router进阶文档学习笔记"></a>vue-router进阶文档学习笔记</h2><h4 id="1-概述及原理"><a href="#1-概述及原理" class="headerlink" title="1.概述及原理"></a>1.概述及原理</h4><p>随着前端业务越来越复杂，以及用户体验要求提升，原本多页面应用的开发模式越发难以满足要求，单页面应用更加受到追捧，而单页面应用更新页面视图需要统一管理(即前端路由)。<br><img src="../images/2020-03-22-20-30-57.png" alt="单页面与多页面应用对比"><br>更新视图但不能重新请求页面是前端路由核心，主要通过两种方式实现:<br>&emsp;&emsp;一是通过改变以及解析URL中的hash(即’#’后面的部分)；<br>&emsp;&emsp;二是通过操作History State(HTML5新增，IE9以上浏览器支持)<br>vue-router是Vue.js框架的路由插件，它和 Vue.js 的核心深度集成。  vue-router除了实现了上述两种方式外还支持abstract模式，该模式支持全部的javascript运行环境，如nodejs。我们看下vue-router关于模式选择的源码:<br><img src="../images/2020-03-22-23-35-11.png" alt="vue-router关于模式选择"><br>abstract模式的实现也很简单，stack数组保存route链，index指定当前route，源码如下:<br><img src="../images/2020-03-23-00-43-38.png" alt="abstract模式源码"><br>基础使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;声明式导航</span><br><span class="line">&lt;!-- 配置path: &#x2F;user&#x2F;:userId  导航URL: &#x2F;user&#x2F;123  --&gt;</span><br><span class="line">&lt;router-link :to&#x3D;&quot;&#123; name: &#39;user&#39;, params: &#123; userId: 123 &#125;&#125;&quot;&gt;User&lt;&#x2F;router-link&gt;</span><br><span class="line">&lt;!-- &#x2F;user?userId&#x3D;123  --&gt;</span><br><span class="line">&lt;router-link :to&#x3D;&quot;&#123; path: &#39;user&#39;, query: &#123; userId: &#39;123&#39; &#125;&#125;&quot; &gt;User&lt;&#x2F;router-link&gt;</span><br><span class="line">&#x2F;&#x2F;编程式导航</span><br><span class="line">router.push(&#123; name: &#39;user&#39;, params: &#123; userId: 123 &#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-导航守卫"><a href="#2-导航守卫" class="headerlink" title="2.导航守卫"></a>2.导航守卫</h4><p><img src="../images/2020-03-25-23-16-48.png" alt="完整的导航解析流程"><br>导航守卫基本分为三类</p>
+<ul>
+<li>全局守卫: router.beforeEach(全局前置守卫)、router.beforeResolve(全局解析守卫)、router.afterEach(全局后置钩子) <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  const router &#x3D; new VueRouter(&#123; ... &#125;)</span><br><span class="line">  &#x2F;**</span><br><span class="line">   * to: Route: 即将要进入的目标 路由对象</span><br><span class="line">* from: Route: 当前导航正要离开的路由</span><br><span class="line">* next: Function: 一定要调用该方法来 resolve 这个钩子。</span><br><span class="line">   *&#x2F;</span><br><span class="line">   router.beforeEach((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">   	&#x2F;&#x2F; next(): 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 confirmed (确认的)。</span><br><span class="line">       &#x2F;&#x2F; next(false): 中断当前的导航。如果浏览器的 URL 改变了 (可能是用户手动或者浏览器后退按钮)，那么 URL 地址会重置到 from 路由对应的地址。</span><br><span class="line">       &#x2F;&#x2F; next(&#39;&#x2F;xxx&#39;) 或者 next(&#123; path: &#39;&#x2F;xxx&#39; &#125;): 跳转到一个不同的地址。当前的导航被中断，然后进行一个新的导航。</span><br><span class="line">       &#x2F;&#x2F; next(error): 如果传入 next 的参数是一个 Error 实例，则导航会被终止且该错误会被传递给 router.onError() 注册过的回调。</span><br><span class="line">  &#125;)</span><br><span class="line">  router.beforeResolve((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">      &#x2F;&#x2F; 和beforeEach 类似，区别是在导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用。</span><br><span class="line">   &#125;)</span><br><span class="line">router.afterEach((to, from) &#x3D;&gt; &#123;</span><br><span class="line">     &#x2F;&#x2F; 和其他全局守卫不同的是，这些钩子不会接受 next 函数也不会改变导航本身</span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure></li>
+<li>路由独享守卫: 在路由配置上直接定义 beforeEnter 守卫</li>
+<li>组件内守卫: 在组件内定义路由的导航守卫beforeRouteEnter 、beforeRouteUpdate 、beforeRouteLeave<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; beforeRouteEnter 是支持给 next 传递回调的唯一守卫</span><br><span class="line">beforeRouteEnter (to, from, next) &#123;</span><br><span class="line">  next(vm &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 通过 &#96;vm&#96; 访问组件实例</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 对于beforeRouteUpdate 和 beforeRouteLeave 来说，this 已经可用了，所以不支持传递回调，因为没有必要了。</span><br><span class="line">beforeRouteUpdate (to, from, next) &#123;</span><br><span class="line">  &#x2F;&#x2F; 可以使用this</span><br><span class="line">  this.name &#x3D; to.params.name</span><br><span class="line">  next() &#x2F;&#x2F; 不支持callback</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 离开守卫通常用来禁止用户在还未保存修改前突然离开。该导航可以通过 next(false) 来取消。</span><br><span class="line">beforeRouteLeave (to, from, next) &#123;</span><br><span class="line">const answer &#x3D; window.confirm(&#39;Do you really want to leave? you have unsaved changes!&#39;)</span><br><span class="line">  if (answer) &#123;</span><br><span class="line">    next()</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    next(false)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>参数或查询的改变并不会触发进入/离开的导航守卫。可以通过观察 $route 对象来应对这些变化，或使用 beforeRouteUpdate 的组件内守卫。</p>
+<h4 id="3-滚动行为"><a href="#3-滚动行为" class="headerlink" title="3.滚动行为"></a>3.滚动行为</h4><p>vue-router可以自定义路由切换时页面如何滚动，但这个功能只在IE9+浏览器(支持history.pushState)中可用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">const router &#x3D; new VueRouter(&#123;</span><br><span class="line">  routes: [...],</span><br><span class="line">  &#x2F;**</span><br><span class="line">  * 注意1: 挂载点时router实例，而不是路由记录(routers下)</span><br><span class="line">  * 注意2: savePosition只有在通过浏览器的 前进&#x2F;后退 按钮触发的跳转才有值</span><br><span class="line">  *&#x2F;</span><br><span class="line">  scrollBehavior (to, from, savedPosition) &#123;</span><br><span class="line">      if (savedPosition) &#123;</span><br><span class="line">        &#x2F;&#x2F; 当且仅当popstate导航有效</span><br><span class="line">        return savedPosition</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        const position &#x3D; &#123;&#125;</span><br><span class="line">        &#x2F;&#x2F; return的位置对象添加selector属性以滚动到锚点</span><br><span class="line">        if (to.hash) &#123;</span><br><span class="line">          position.selector &#x3D; to.hash</span><br><span class="line">          &#x2F;&#x2F; 滚动到#anchor2再滚 &#123; y: 100 &#125;</span><br><span class="line">          if (to.hash &#x3D;&#x3D;&#x3D; &#39;#anchor2&#39;) &#123;</span><br><span class="line">            position.offset &#x3D; &#123; y: 100 &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          &#x2F;&#x2F; return一个空对象或falsy值(undefind&#x2F;null等)则没有滚动行为</span><br><span class="line">          return false</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; return一个Promise以实现异步滚动</span><br><span class="line">        return new Promise(resolve &#x3D;&gt; &#123;</span><br><span class="line">          &#x2F;&#x2F; 通过路由元信息判断是否滚动到顶部</span><br><span class="line">          if (to.matched.some(m &#x3D;&gt; m.meta.scrollToTop)) &#123;</span><br><span class="line">            &#x2F;&#x2F; 当selector属性无效时x,y位置信息才生效</span><br><span class="line">            position.x &#x3D; 0</span><br><span class="line">            position.y &#x3D; 0</span><br><span class="line">          &#125;</span><br><span class="line">          &#x2F;&#x2F; 等待外层的动画或其他行为完成后(触发自定义事件xxx)滚动</span><br><span class="line">          this.app.$root.$once(&#39;xxx&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">            resolve(position)</span><br><span class="line">          &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
